@@ -40,6 +40,35 @@
       });
     }
   </script>
+
+
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-app.js"></script>
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+       https://firebase.google.com/docs/web/setup#available-libraries -->
+  <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-analytics.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-firestore.js"></script>
+<!--  <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-firestore.js"></script>-->
+
+  <script>
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  var firebaseConfig = {
+    apiKey: "AIzaSyAfvlLLL6hEVZXihownRSbkCoRVmJM-6PM",
+    authDomain: "wheels-and-tires.firebaseapp.com",
+    projectId: "wheels-and-tires",
+    storageBucket: "wheels-and-tires.appspot.com",
+    messagingSenderId: "882258201613",
+    appId: "1:882258201613:web:0ebe82d5caf1a748765944",
+    measurementId: "G-31M2YMFQ8Z"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+  </script>
+
   <script src="main.dart.js" type="application/javascript"></script>
 </body>
 </html>
