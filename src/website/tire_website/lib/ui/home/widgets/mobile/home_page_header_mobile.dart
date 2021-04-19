@@ -9,73 +9,25 @@ class HomePageHeaderMobile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: MediaQuery.of(context).size.height,
+      height: 95,
       child: Scaffold(
-        appBar: AppBar(
-          title: const CustomText(
-            text: 'Tyres and wheels',
-            size: ksMobileTextSizeMedium,
-            color: Colors.white,
-          ),
-          bottom: PreferredSize(
-            preferredSize: const Size.fromHeight(40.0),
-            child: Container(
-              margin: const EdgeInsets.symmetric(vertical: 10.0),
-              child: const HomePageSearchBar(),
-            ),
-          ),
-        ),
-        drawer: Drawer(
-          child: ListView(
-            children: <Widget>[
-              ListTile(
-                onTap: () {},
-                title: const CustomText(
-                  text: 'Home',
-                  size: ksMobileTextSizeSmall,
-                ),
-                trailing: const Icon(Icons.home_outlined),
-              ),
-              ListTile(
-                onTap: () {},
-                title: const CustomText(
-                  text: 'Categories',
-                  size: ksMobileTextSizeSmall,
-                ),
-                trailing: const Icon(Icons.shopping_cart_outlined),
-              ),
-              ListTile(
-                onTap: () {},
-                title: const CustomText(
-                  text: 'About',
-                  size: ksMobileTextSizeSmall,
-                ),
-                trailing: const Icon(Icons.info_outline_rounded),
-              ),
-              ListTile(
-                onTap: () {},
-                title: const CustomText(
-                  text: 'Contact Us',
-                  size: ksMobileTextSizeSmall,
-                ),
-                trailing: const Icon(Icons.contact_mail_outlined),
-              ),
-              ListTile(
-                onTap: () {},
-                title: const CustomText(
-                  text: 'Login',
-                  size: ksMobileTextSizeSmall,
-                ),
-              ),
-              ListTile(
-                onTap: () {},
-                title: const CustomText(
-                  text: 'Sign Up',
-                  size: ksMobileTextSizeSmall,
-                ),
-              ),
-            ],
-          ),
+        appBar: appBar(),
+      ),
+    );
+  }
+
+  AppBar appBar() {
+    return AppBar(
+      title: const CustomText(
+        text: '      Tyres and wheels',
+        size: ksMobileTextSizeMedium,
+        color: Colors.white,
+      ),
+      bottom: PreferredSize(
+        preferredSize: const Size.fromHeight(40.0),
+        child: Container(
+          margin: const EdgeInsets.symmetric(vertical: 10.0),
+          child: const HomePageSearchBar(),
         ),
       ),
     );

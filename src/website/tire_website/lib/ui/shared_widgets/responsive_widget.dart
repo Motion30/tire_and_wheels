@@ -15,10 +15,10 @@ class CustomResponsiveWidget extends StatelessWidget {
 
     print(screenWidth);
 
-    if (screenWidth < 900 && screenWidth > 500) {
-      viewToDisplay = tabletView;
-    } else if (screenWidth <= 500) {
-      viewToDisplay = mobileView;
+    if (screenWidth < 900 && screenWidth > 600) {
+      viewToDisplay = tabletView ?? const Center(child: Text('Tablet'));
+    } else if (screenWidth <= 600) {
+      viewToDisplay = mobileView ?? const Center(child: Text('Mobile'));
     } else {
       viewToDisplay = desktopView;
     }

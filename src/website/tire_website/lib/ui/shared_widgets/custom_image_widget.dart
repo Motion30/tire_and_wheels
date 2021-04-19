@@ -1,13 +1,12 @@
 import 'dart:io';
 
-
 import 'package:flutter/material.dart';
 import 'package:tire_website/utils/eums.dart';
 
 class CustomImageWidget extends StatelessWidget {
   const CustomImageWidget({
     @required this.imageWidgetType,
-    this.imageUrl,
+    @required this.imageUrl,
     this.imageFile,
     this.boxFit = BoxFit.fill,
   });
@@ -24,6 +23,13 @@ class CustomImageWidget extends StatelessWidget {
         return Image.network(
           imageUrl,
           fit: BoxFit.fill,
+          errorBuilder: (
+            _,
+            __,
+            ___,
+          ) {
+            return const Placeholder();
+          },
           loadingBuilder: (
             BuildContext context,
             Widget child,
@@ -46,12 +52,26 @@ class CustomImageWidget extends StatelessWidget {
         return Image.file(
           imageFile,
           fit: boxFit,
+          errorBuilder: (
+            _,
+            __,
+            ___,
+          ) {
+            return const Placeholder();
+          },
         );
         break;
       case ImageWidgetType.asset:
         return Image.asset(
           imageUrl,
           fit: BoxFit.fill,
+          errorBuilder: (
+            _,
+            __,
+            ___,
+          ) {
+            return const Placeholder();
+          },
         );
         break;
       case ImageWidgetType.none:

@@ -7,16 +7,20 @@ class CustomButton extends StatelessWidget {
     this.textColor = Colors.white,
     this.outLine = false,
     this.fontSize = 20,
+    this.radius = 5.0,
     this.fontWeight = FontWeight.bold,
     this.width,
     this.height,
+    this.buttonColor,
   });
 
   final Function onPress;
   final double width;
   final double height;
+  final double radius;
   final String title;
   final Color textColor;
+  final Color buttonColor;
   final bool outLine;
   final FontWeight fontWeight;
   final double fontSize;
@@ -29,11 +33,11 @@ class CustomButton extends StatelessWidget {
         decoration: outLine
             ? BoxDecoration(
                 border: Border.all(color: Colors.white),
-                borderRadius: BorderRadius.circular(5.0),
+                borderRadius: BorderRadius.circular(radius),
               )
             : BoxDecoration(
-                color: Theme.of(context).accentColor,
-                borderRadius: BorderRadius.circular(5.0),
+                color: buttonColor ?? Theme.of(context).accentColor,
+                borderRadius: BorderRadius.circular(radius),
               ),
         padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
         width: width,
