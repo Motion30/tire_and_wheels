@@ -26,7 +26,7 @@ class CustomImageWidget extends StatelessWidget {
           errorBuilder: (
             _,
             __,
-            ___,
+            StackTrace e,
           ) {
             return const Placeholder();
           },

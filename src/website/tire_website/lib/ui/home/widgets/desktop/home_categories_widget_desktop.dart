@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:tire_website/ui/product/pages/rims_page.dart';
+import 'package:tire_website/ui/product/pages/tubes_page.dart';
+import 'package:tire_website/ui/product/pages/tyres_page.dart';
 import 'package:tire_website/ui/shared_widgets/custom_button.dart';
 import 'package:tire_website/ui/shared_widgets/custom_image_widget.dart';
 import 'package:tire_website/ui/shared_widgets/custom_text.dart';
@@ -27,16 +30,19 @@ class HomeCategoriesWidgetDesktop extends StatelessWidget {
                 'Tubes',
                 'assets/images/tubes.png',
                 color: const Color.fromRGBO(119, 55, 255, 1),
+                context: context,
               ),
               categoriesItem(
                 'Tyres',
                 'assets/images/tyres.png',
                 color: const Color.fromRGBO(15, 0, 193, 0.8),
+                context: context,
               ),
               categoriesItem(
                 'Rims',
                 'assets/images/rims.png',
                 color: const Color.fromRGBO(255, 129, 38, 1),
+                context: context,
               ),
             ],
           ),
@@ -45,7 +51,8 @@ class HomeCategoriesWidgetDesktop extends StatelessWidget {
     );
   }
 
-  Widget categoriesItem(String title, String imagePath, {Color color}) {
+  Widget categoriesItem(String title, String imagePath,
+      {Color color, BuildContext context}) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
@@ -89,7 +96,27 @@ class HomeCategoriesWidgetDesktop extends StatelessWidget {
                 height: 38.0,
                 width: 128.0,
                 child: CustomButton(
-                  onPress: () {},
+                  onPress: () {
+                    if (title.toLowerCase() == 'tubes') {
+                      Navigator.of(context).push(
+                        MaterialPageRoute<Widget>(
+                          builder: (BuildContext context) => const TubesPage(),
+                        ),
+                      );
+                    } else if (title.toLowerCase() == 'tyres') {
+                      Navigator.of(context).push(
+                        MaterialPageRoute<Widget>(
+                          builder: (BuildContext context) => const TyresPage(),
+                        ),
+                      );
+                    } else if (title.toLowerCase() == 'rims') {
+                      Navigator.of(context).push(
+                        MaterialPageRoute<Widget>(
+                          builder: (BuildContext context) => const RimsPage(),
+                        ),
+                      );
+                    }
+                  },
                   title: 'Check Out',
                   fontSize: 13.0,
                   fontWeight: FontWeight.w600,

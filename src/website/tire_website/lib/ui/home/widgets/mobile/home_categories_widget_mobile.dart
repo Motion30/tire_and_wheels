@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:tire_website/ui/product/pages/rims_page.dart';
+import 'package:tire_website/ui/product/pages/tubes_page.dart';
+import 'package:tire_website/ui/product/pages/tyres_page.dart';
 import 'package:tire_website/ui/shared_widgets/custom_button.dart';
 import 'package:tire_website/ui/shared_widgets/custom_image_widget.dart';
 import 'package:tire_website/ui/shared_widgets/custom_text.dart';
@@ -95,7 +98,27 @@ class HomeCategoriesWidgetMobile extends StatelessWidget {
                 height: 30.0,
                 width: MediaQuery.of(context).size.width * 0.40,
                 child: CustomButton(
-                  onPress: () {},
+                  onPress: () {
+                    if (title.toLowerCase() == 'tubes') {
+                      Navigator.of(context).push(
+                        MaterialPageRoute<Widget>(
+                          builder: (BuildContext context) => const TubesPage(),
+                        ),
+                      );
+                    } else if (title.toLowerCase() == 'tyres') {
+                      Navigator.of(context).push(
+                        MaterialPageRoute<Widget>(
+                          builder: (BuildContext context) => const TyresPage(),
+                        ),
+                      );
+                    } else if (title.toLowerCase() == 'rims') {
+                      Navigator.of(context).push(
+                        MaterialPageRoute<Widget>(
+                          builder: (BuildContext context) => const RimsPage(),
+                        ),
+                      );
+                    }
+                  },
                   title: 'Check Out',
                   fontSize: 12.0,
                   fontWeight: FontWeight.w600,
