@@ -19,17 +19,24 @@ class LoginPageMessage extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Container(
-          padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
-          child: const Icon(Icons.arrow_back_ios),
-        ),
-        Container(
           width: size.width,
-          height: size.height * 0.10,
           padding: const EdgeInsets.only(left: 30.0, top: 20.0),
           child: const CustomText(
-            text: 'Sign In',
-            size: 35.0,
+            text: 'Welcome Back',
+            size: 25.0,
             fontWeight: FontWeight.bold,
+            textAlign: TextAlign.center,
+          ),
+        ),
+        const SizedBox(height: 10.0),
+        SizedBox(
+          width: size.width,
+          child: const CustomText(
+            text: 'Login to your acccount',
+            size: 18.0,
+            fontWeight: FontWeight.w300,
+            textAlign: TextAlign.center,
+            // color: Theme.of(context).accentColor,
           ),
         ),
       ],
@@ -87,7 +94,7 @@ class _LoginPageFormState extends State<LoginPageForm> {
   Widget build(BuildContext context) {
     return Container(
       width: widget.size.width,
-      padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 5.0),
+      padding: const EdgeInsets.symmetric(horizontal: 60.0, vertical: 5.0),
       child: Form(
         key: formKey,
         child: Column(
@@ -95,24 +102,36 @@ class _LoginPageFormState extends State<LoginPageForm> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             const SizedBox(height: 30.0),
+            const CustomText(
+              text: 'Email',
+              size: 18,
+              fontWeight: FontWeight.w300,
+              textAlign: TextAlign.center,
+            ),
             CustomTextField(
               controller: emailController,
-              title: 'Email Address',
+              title: 'example@gmail.com',
             ),
             const SizedBox(height: 15.0),
+            const CustomText(
+              text: 'Password',
+              size: 18.0,
+              fontWeight: FontWeight.w300,
+              textAlign: TextAlign.center,
+            ),
             CustomTextField(
               controller: passwordController,
-              title: 'Password',
+              title: '**********',
               hideText: true,
             ),
             const SizedBox(height: 5.0),
-            InkWell(
-              onTap: () {},
-              child: const CustomText(
-                text: 'Forgot password?',
-                size: 14,
-              ),
-            ),
+            // InkWell(
+            //   onTap: () {},
+            //   child: const CustomText(
+            //     text: 'Forgot password?',
+            //     size: 14,
+            //   ),
+            // ),
             const SizedBox(height: 15.0),
             ValueListenableBuilder<bool>(
               valueListenable: isLoading,
@@ -121,6 +140,7 @@ class _LoginPageFormState extends State<LoginPageForm> {
                   return const Center(child: CircularProgressIndicator());
                 } else {
                   return CustomButton(
+                    buttonColor: Theme.of(context).primaryColor,
                     title: 'Login',
                     onPress: () => validate(),
                   );
@@ -150,7 +170,7 @@ class LoginPageMoreOptions extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           const CustomText(
-            text: 'New on Blue fibre?',
+            text: 'Not a member?',
             size: 16,
             fontWeight: FontWeight.w300,
           ),
@@ -160,7 +180,7 @@ class LoginPageMoreOptions extends StatelessWidget {
               text: ' Sign Up',
               size: 16,
               fontWeight: FontWeight.w300,
-              color: Theme.of(context).primaryColor,
+              color: Theme.of(context).accentColor,
             ),
           ),
         ],

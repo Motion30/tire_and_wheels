@@ -5,6 +5,9 @@ class TyresPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(child: Text('tryes'),);
+    // ignore: avoid_unnecessary_containers
+    return Container(
+      child: const Text('tryes'),
+    );
   }
 }

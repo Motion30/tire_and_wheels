@@ -3,7 +3,12 @@ import 'package:tire_website/ui/cart/cart_page.dart';
 import 'package:tire_website/ui/shared_widgets/custom_text.dart';
 
 class HeaderWidget extends StatelessWidget {
-  const HeaderWidget();
+  const HeaderWidget(
+      {this.fontSize, this.showCart = true, this.showMenu = true});
+
+  final double fontSize;
+  final bool showCart;
+  final bool showMenu;
 
   @override
   Widget build(BuildContext context) {
@@ -20,31 +25,34 @@ class HeaderWidget extends StatelessWidget {
             Container(),
             Row(
               mainAxisSize: MainAxisSize.min,
-              children: const <Widget>[
-                SizedBox(
+              children: <Widget>[
+                const SizedBox(
                   height: 20,
                   width: 20,
                   child: Placeholder(color: Colors.white),
                 ),
-                SizedBox(width: 20.0),
+                const SizedBox(width: 20.0),
                 CustomText(
                   text: 'Tyres and wheels',
                   color: Colors.white,
-                  size: 36.0,
+                  size: fontSize ?? 36.0,
                 ),
               ],
             ),
-            IconButton(
-              onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute<Widget>(
-                    builder: (BuildContext context) => const CartPage()));
-              },
-              icon: const Icon(
-                Icons.shopping_cart_outlined,
-                color: Colors.white,
-                size: 30,
-              ),
-            ),
+            if (showCart)
+              IconButton(
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute<Widget>(
+                      builder: (BuildContext context) => const CartPage()));
+                },
+                icon: const Icon(
+                  Icons.shopping_cart_outlined,
+                  color: Colors.white,
+                  size: 30,
+                ),
+              )
+            else
+              Container(),
           ],
         ),
       ),

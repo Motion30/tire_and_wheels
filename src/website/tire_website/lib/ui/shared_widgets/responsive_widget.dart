@@ -13,7 +13,7 @@ class CustomResponsiveWidget extends StatelessWidget {
     final double screenWidth = MediaQuery.of(context).size.width;
     Widget viewToDisplay;
 
-    print(screenWidth);
+    debugPrint(screenWidth.toString());
 
     if (screenWidth < 900 && screenWidth > 600) {
       viewToDisplay = tabletView ?? const Center(child: Text('Tablet'));

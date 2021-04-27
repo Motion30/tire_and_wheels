@@ -1,43 +1,78 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
 import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:tire_website/business_logic/auth/model/product_model.dart';
+import 'package:tire_website/ui/cart/cart_page.dart';
 import 'package:tire_website/ui/shared_widgets/custom_button.dart';
 import 'package:tire_website/ui/shared_widgets/custom_image_widget.dart';
 import 'package:tire_website/ui/shared_widgets/custom_text.dart';
-import 'package:tire_website/ui/shared_widgets/header_widget.dart';
-import 'package:tire_website/ui/shared_widgets/hover_widget.dart';
 import 'package:tire_website/ui/shared_widgets/side_menu.dart';
 import 'package:tire_website/utils/eums.dart';
 
-class ProductWidgetDesktop extends StatelessWidget {
+class ProductWidgetMobile extends StatelessWidget {
+  ProductWidgetMobile({this.type});
+
+  final String type;
+  final GlobalKey<SliderMenuContainerState> _key =
+      GlobalKey<SliderMenuContainerState>();
+
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: MediaQuery.of(context).size.height,
-      child: ListView(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        children: const <Widget>[
-          HeaderWidget(),
-          ProductPageBodyDesktop(),
-        ],
+    return Scaffold(
+      body: SizedBox(
+        // height: MediaQuery.of(context).size.height,
+        child: ListView(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          children: <Widget>[
+            SizedBox(
+              height: MediaQuery.of(context).size.height,
+              child: SliderMenuContainer(
+                appBarColor: Theme.of(context).primaryColor,
+                drawerIconColor: Colors.white,
+                key: _key,
+                sliderMenuOpenSize: 200,
+                title: const CustomText(
+                  text: 'Tyres and wheels',
+                  color: Colors.white,
+                  size: 22.0,
+                ),
+                trailing: IconButton(
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute<Widget>(
+                        builder: (BuildContext context) => const CartPage()));
+                  },
+                  icon: const Icon(
+                    Icons.shopping_cart_outlined,
+                    color: Colors.white,
+                    size: 25,
+                  ),
+                ),
+                sliderMenu: SideMenuMobile(),
+                sliderMain: Container(
+                  width: double.infinity,
+                    color: Colors.white, child: ProductPageBodyMobile(type: type),
+                ),
+              ),
+            ),
+            // const ProductPageBodyMobile(),
+          ],
+        ),
+        // child:
       ),
     );
   }
 }
 
-class ProductPageBodyDesktop extends StatelessWidget {
-  const ProductPageBodyDesktop();
+class ProductPageBodyMobile extends StatelessWidget {
+  const ProductPageBodyMobile({this.type});
+
+  final String type;
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: <Widget>[
-        const SideMenu(),
-        Body(),
-      ],
-    );
+    return Body(type: type);
   }
 }
 
@@ -58,8 +93,8 @@ class ProductWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           SizedBox(
-            width: 220.0,
-            height: 180.0,
+            width: 180.0,
+            height: 120.0,
             child: CustomImageWidget(
               imageWidgetType: ImageWidgetType.network,
               imageUrl: product.images.first,
@@ -71,13 +106,13 @@ class ProductWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   CustomText(
-                    text: 'Product Name',
-                    size: 18,
+                    text: 'Name',
+                    size: 15,
                     color: Theme.of(context).accentColor,
                   ),
                   CustomText(
                     text: product.productName,
-                    size: 16,
+                    size: 13,
                     fontWeight: FontWeight.w300,
                     color: Theme.of(context).accentColor,
                   ),
@@ -87,13 +122,13 @@ class ProductWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   CustomText(
-                    text: 'Product Brand',
-                    size: 18,
+                    text: 'Brand',
+                    size: 15,
                     color: Theme.of(context).accentColor,
                   ),
                   CustomText(
                     text: product.productBrand,
-                    size: 16,
+                    size: 13,
                     fontWeight: FontWeight.w300,
                     color: Theme.of(context).accentColor,
                   ),
@@ -104,12 +139,12 @@ class ProductWidget extends StatelessWidget {
                 children: <Widget>[
                   CustomText(
                     text: 'Size',
-                    size: 18,
+                    size: 15,
                     color: Theme.of(context).accentColor,
                   ),
                   CustomText(
                     text: '${product.size}r',
-                    size: 16,
+                    size: 13,
                     fontWeight: FontWeight.w300,
                     color: Theme.of(context).accentColor,
                   ),
@@ -120,12 +155,12 @@ class ProductWidget extends StatelessWidget {
                 children: <Widget>[
                   CustomText(
                     text: 'Price',
-                    size: 18,
+                    size: 15,
                     color: Theme.of(context).accentColor,
                   ),
                   CustomText(
                     text: '#${product.price}',
-                    size: 16,
+                    size: 13,
                     fontWeight: FontWeight.w300,
                     color: Theme.of(context).accentColor,
                   ),
@@ -179,10 +214,11 @@ class Body extends StatelessWidget {
         shrinkWrap: true,
         physics: const BouncingScrollPhysics(),
         children: <Widget>[
+          const SizedBox(height: 10.0),
           const Center(
             child: CustomText(
               text: 'Tyres',
-              size: 24.0,
+              size: 20.0,
             ),
           ),
           const SizedBox(height: 12.0),
@@ -197,7 +233,7 @@ class Body extends StatelessWidget {
               crossAxisCount: 2,
               crossAxisSpacing: 10.0,
               mainAxisSpacing: 10.0,
-              childAspectRatio: 1.1,
+              childAspectRatio: 0.8,
             ),
             bottomLoader: const SizedBox(
               height: 50,
@@ -234,7 +270,7 @@ class Body extends StatelessWidget {
         const Center(
           child: CustomText(
             text: 'Sort By: ',
-            size: 20.0,
+            size: 18.0,
           ),
         ),
         Container(
@@ -277,5 +313,3 @@ class Body extends StatelessWidget {
     );
   }
 }
-
-

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../shared_widgets/custom_text.dart';
 
 class CustomWarningDialog {
@@ -35,6 +36,7 @@ class CustomWarningDialog {
     String message,
     bool warning = true,
   }) {
+    // ignore: deprecated_member_use
     Scaffold.of(context).showSnackBar(
       SnackBar(
         content: Text(

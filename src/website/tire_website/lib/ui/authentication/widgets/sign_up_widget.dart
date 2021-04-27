@@ -1,4 +1,3 @@
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:tire_website/business_logic/auth/repo/authentication_repo.dart';
@@ -6,6 +5,7 @@ import 'package:tire_website/ui/home/pages/home_page.dart';
 import 'package:tire_website/ui/shared_widgets/custom_button.dart';
 import 'package:tire_website/ui/shared_widgets/custom_dialog.dart';
 import 'package:tire_website/ui/shared_widgets/custom_textfield.dart';
+
 import '../../shared_widgets/custom_text.dart';
 
 class SignUpPageMessage extends StatelessWidget {
@@ -15,14 +15,30 @@ class SignUpPageMessage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: size.width,
-      padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
-      child: const CustomText(
-        text: 'Sign Up Now',
-        size: 35.0,
-        fontWeight: FontWeight.bold,
-      ),
+    return Column(
+      children: <Widget>[
+        Container(
+          width: size.width,
+          padding: const EdgeInsets.only(left: 30.0, top: 20.0),
+          child: const CustomText(
+            text: 'Create An Account',
+            size: 25.0,
+            fontWeight: FontWeight.bold,
+            textAlign: TextAlign.center,
+          ),
+        ),
+        const SizedBox(height: 10.0),
+        SizedBox(
+          width: size.width,
+          child: const CustomText(
+            text: 'It’s quick and easy',
+            size: 18.0,
+            fontWeight: FontWeight.w300,
+            textAlign: TextAlign.center,
+            // color: Theme.of(context).accentColor,
+          ),
+        ),
+      ],
     );
   }
 }
@@ -90,40 +106,71 @@ class _SignUpPageFormState extends State<SignUpPageForm> {
   Widget build(BuildContext context) {
     return Container(
       width: widget.size.width,
-      padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
+      padding: const EdgeInsets.symmetric(horizontal: 60.0, vertical: 5.0),
       decoration: const BoxDecoration(color: Colors.white),
       child: Form(
         key: formKey,
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
+            const CustomText(
+              text: 'Full Name',
+              size: 18,
+              fontWeight: FontWeight.w300,
+              textAlign: TextAlign.center,
+            ),
             CustomTextField(
               controller: fullNameController,
-              title: 'Full Name',
+              title: 'John Smith',
               length: 3,
             ),
             const SizedBox(height: 15.0),
-            CustomTextField(
-              controller: userNameController,
-              title: 'User Name',
-              length: 3,
+            const CustomText(
+              text: 'Email',
+              size: 18,
+              fontWeight: FontWeight.w300,
+              textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 15.0),
             CustomTextField(
               controller: emailController,
-              title: 'Email Address',
+              title: 'example@gmail.com',
             ),
             const SizedBox(height: 15.0),
+            const CustomText(
+              text: 'Username',
+              size: 18,
+              fontWeight: FontWeight.w300,
+              textAlign: TextAlign.center,
+            ),
+            CustomTextField(
+              controller: userNameController,
+              title: 'testUser',
+              length: 3,
+            ),
+            const SizedBox(height: 15.0),
+            const CustomText(
+              text: 'PhoneNumber',
+              size: 18,
+              fontWeight: FontWeight.w300,
+              textAlign: TextAlign.center,
+            ),
             CustomTextField(
               controller: phoneController,
-              title: 'Phone Number',
+              title: '08011223344',
               keyboardType: TextInputType.number,
               length: 10,
             ),
             const SizedBox(height: 15.0),
+            const CustomText(
+              text: 'Password',
+              size: 18,
+              fontWeight: FontWeight.w300,
+              textAlign: TextAlign.center,
+            ),
             CustomTextField(
               controller: passwordController,
-              title: 'Password',
+              title: '********',
               length: 6,
             ),
             const SizedBox(height: 15.0),
@@ -133,9 +180,14 @@ class _SignUpPageFormState extends State<SignUpPageForm> {
                 if (value == true) {
                   return const Center(child: CircularProgressIndicator());
                 } else {
-                  return CustomButton(
-                    title: 'SignUp',
-                    onPress: () => validate(),
+                  return Center(
+                    child: CustomButton(
+                      width: MediaQuery.of(context).size.width * 0.45,
+                      buttonColor: Theme.of(context).primaryColor,
+                      title: 'SignUp',
+                      fontSize: 18.0,
+                      onPress: () => validate(),
+                    ),
                   );
                 }
               },
@@ -162,7 +214,7 @@ class SignUpPageMoreOptions extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           const CustomText(
-            text: 'Already A Member?',
+            text: 'Have an account?',
             size: 16,
             fontWeight: FontWeight.w300,
           ),
@@ -172,7 +224,7 @@ class SignUpPageMoreOptions extends StatelessWidget {
               text: ' Login',
               size: 16,
               fontWeight: FontWeight.w300,
-              color: Colors.blue,
+              // color: Theme.of(context).accentColor,
             ),
           ),
         ],

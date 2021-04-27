@@ -40,7 +40,7 @@ class ProductModel {
 
   Map<String, dynamic> toMap() {
     // ignore: unnecessary_cast
-    return {
+    return <String, dynamic>{
       'productId': productId,
       'productName': productName,
       'type': type,

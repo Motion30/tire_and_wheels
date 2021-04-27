@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tire_website/ui/product/pages/rims_page.dart';
-import 'package:tire_website/ui/product/pages/tubes_page.dart';
+import 'package:tire_website/ui/product/pages/product_page.dart';
 import 'package:tire_website/ui/product/pages/tyres_page.dart';
 import 'package:tire_website/ui/shared_widgets/custom_button.dart';
 import 'package:tire_website/ui/shared_widgets/custom_image_widget.dart';
@@ -102,7 +102,7 @@ class HomeCategoriesWidgetMobile extends StatelessWidget {
                     if (title.toLowerCase() == 'tubes') {
                       Navigator.of(context).push(
                         MaterialPageRoute<Widget>(
-                          builder: (BuildContext context) => const TubesPage(),
+                          builder: (BuildContext context) => const ProductPage(),
                         ),
                       );
                     } else if (title.toLowerCase() == 'tyres') {

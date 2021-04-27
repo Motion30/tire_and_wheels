@@ -14,6 +14,8 @@ class AuthenticationRepo {
   final CollectionReference _userCollectionRef =
       FirebaseFirestore.instance.collection(firestoreUserData);
 
+  FirebaseAuth get auth => _auth;
+
   LoginUserModel userFromFirebase(User user) {
     return user != null ? LoginUserModel(uid: user.uid) : null;
   }
