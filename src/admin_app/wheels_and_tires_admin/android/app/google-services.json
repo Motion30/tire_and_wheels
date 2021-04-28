@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "882258201613",
+    "firebase_url": "https://wheels-and-tires-default-rtdb.firebaseio.com",
+    "project_id": "wheels-and-tires",
+    "storage_bucket": "wheels-and-tires.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:882258201613:android:8c0c4634a1d00b97765944",
+        "android_client_info": {
+          "package_name": "com.example.wheels_and_tires_admin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "882258201613-tctufjp6a243pctv0gaf6ag90qcflnm4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3qrmqUQHJ4W9U6aV3SBfMxRpc4M3oTDI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "882258201613-tctufjp6a243pctv0gaf6ag90qcflnm4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
