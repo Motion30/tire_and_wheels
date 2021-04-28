@@ -175,7 +175,6 @@ class EditProduct extends StatelessWidget {
       child: Form(
         key: formKey,
         child: ListView(
-
           children: <Widget>[
             const SizedBox(height: 20.0),
             CustomTextField(
