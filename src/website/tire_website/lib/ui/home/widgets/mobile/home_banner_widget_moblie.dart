@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:tire_website/business_logic/auth/model/route.dart';
 import 'package:tire_website/ui/shared_widgets/custom_button.dart';
 import 'package:tire_website/ui/shared_widgets/custom_text.dart';
+import 'package:tire_website/ui/shared_widgets/hover_widget.dart';
 import 'package:tire_website/utils/constant_helper.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class HomeBannerWidgetMobile extends StatelessWidget {
   const HomeBannerWidgetMobile();
@@ -42,7 +45,7 @@ class HomeBannerWidgetMobile extends StatelessWidget {
                 width: MediaQuery.of(context).size.width * 0.63,
                 child: const CustomText(
                   text:
-                  'We are your one stop shop for quality Tyres, Tubes and Rims',
+                      'We are your one stop shop for quality Tyres, Tubes and Rims',
                   size: ksMobileTextSizeExtraLarge - 2,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
@@ -54,7 +57,7 @@ class HomeBannerWidgetMobile extends StatelessWidget {
                 width: MediaQuery.of(context).size.width * 0.40,
                 child: const CustomText(
                   text:
-                  'An all in one system that optimizes your products on your favourite selling platforms easily accessible, efficient and affordable.',
+                      'An all in one system that optimizes your products on your favourite selling platforms easily accessible, efficient and affordable.',
                   size: ksMobileTextSizeTiny + 2,
                   fontWeight: FontWeight.w300,
                   color: Colors.white,
@@ -62,13 +65,19 @@ class HomeBannerWidgetMobile extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 25.0),
-              CustomButton(
-                width: 200.0,
-                radius: 50.0,
-                onPress: () {},
-                fontWeight: FontWeight.w300,
-                fontSize: ksMobileTextSizeSmall,
-                title: 'Get Started',
+              CustomHover(
+                color: Theme.of(context).accentColor,
+                center: false,
+                child: CustomButton(
+                  width: 200.0,
+                  radius: 50.0,
+                  onPress: () {
+                    VxNavigator.of(context).push(Uri.parse(RouteClass.home));
+                  },
+                  fontWeight: FontWeight.w300,
+                  fontSize: ksMobileTextSizeSmall,
+                  title: 'Get Started',
+                ),
               ),
             ],
           ),

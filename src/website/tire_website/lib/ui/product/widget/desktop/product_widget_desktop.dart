@@ -5,6 +5,7 @@ import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:tire_website/business_logic/auth/bloc/product_bloc.dart';
 import 'package:tire_website/business_logic/auth/model/product_model.dart';
 import 'package:tire_website/ui/shared_widgets/custom_button.dart';
+import 'package:tire_website/ui/shared_widgets/custom_dialog.dart';
 import 'package:tire_website/ui/shared_widgets/custom_image_widget.dart';
 import 'package:tire_website/ui/shared_widgets/custom_text.dart';
 import 'package:tire_website/ui/shared_widgets/header_widget.dart';
@@ -49,9 +50,10 @@ class ProductPageBodyDesktop extends StatelessWidget {
 }
 
 class ProductWidget extends StatelessWidget {
-  const ProductWidget(this.product);
+  ProductWidget(this.product);
 
   final ProductModel product;
+  bool showed = false;
 
   @override
   Widget build(BuildContext context) {
@@ -144,9 +146,18 @@ class ProductWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               BlocConsumer<ProductBloc, ProductState>(
-                listener: (BuildContext context, ProductState state) {},
+                listener: (BuildContext context, ProductState state) {
+                  if (state is ErrorAddProductToCartState) {
+                    print('error');
+                    CustomWarningDialog.showSnackBar(
+                      context: context,
+                      message: state.message,
+                    );
+                  }
+                },
                 builder: (BuildContext context, ProductState state) {
-                  if (state is LoadingAddProductToCartState) {
+                  if (state is LoadingAddProductToCartState &&
+                      state.id == product.productId) {
                     return const Center(child: CircularProgressIndicator());
                   }
                   return CustomButton(
@@ -157,7 +168,8 @@ class ProductWidget extends StatelessWidget {
                     buttonColor:
                         Theme.of(context).primaryColor.withOpacity(0.7),
                     onPress: () {
-                      //TODO: add to cart function
+                      BlocProvider.of<ProductBloc>(context)
+                          .add(AddProductToCart(product));
                     },
                   );
                 },
@@ -181,10 +193,9 @@ class ProductWidget extends StatelessWidget {
 }
 
 class Body extends StatefulWidget {
-  const Body({this.type});
+  Body({this.type});
 
   final String type;
-  static const String initialValue = '';
 
   @override
   _BodyState createState() => _BodyState();
@@ -202,7 +213,17 @@ class _BodyState extends State<Body> {
   Future<void> set() async {
     refreshNotifier.value = true;
     await Future.delayed(Duration(milliseconds: 500));
+    sortResultNotifier.value = FirebaseFirestore.instance
+        .collection('products')
+        .where('type', isEqualTo: widget.type.toLowerCase())
+        .orderBy('timestamp');
     refreshNotifier.value = false;
+  }
+
+  @override
+  void initState() {
+    set();
+    super.initState();
   }
 
   @override

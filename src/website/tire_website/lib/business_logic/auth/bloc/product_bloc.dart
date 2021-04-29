@@ -19,7 +19,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
   ) async* {
     if (event is AddProductToCart) {
       try {
-        yield LoadingAddProductToCartState();
+        yield LoadingAddProductToCartState(event.product.productId);
         await ProductRepo().addProductToCart(event.product);
         yield LoadedAddProductToCartState();
       } catch (e, s) {
@@ -39,6 +39,16 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         debugPrint(e.toString());
         debugPrint(s.toString());
         yield ErrorAddProductToOrderState(e?.message.toString());
+      }
+    }else if (event is DeleteProductFromCartEvent) {
+      try {
+        yield LoadingDeleteProductFromCartState(event.id);
+        await ProductRepo().deleteProductFromCart(event.id);
+        yield LoadedDeleteProductFromCartState();
+      } catch (e, s) {
+        debugPrint(e.toString());
+        debugPrint(s.toString());
+        yield ErrorDeleteProductFromCartState(e?.message.toString());
       }
     }
   }

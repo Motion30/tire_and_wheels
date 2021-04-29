@@ -1,10 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
 import 'package:paginate_firestore/paginate_firestore.dart';
+import 'package:tire_website/business_logic/auth/bloc/product_bloc.dart';
 import 'package:tire_website/business_logic/auth/model/product_model.dart';
+import 'package:tire_website/business_logic/auth/repo/product_repo.dart';
 import 'package:tire_website/ui/cart/cart_page.dart';
 import 'package:tire_website/ui/shared_widgets/custom_button.dart';
+import 'package:tire_website/ui/shared_widgets/custom_dialog.dart';
 import 'package:tire_website/ui/shared_widgets/custom_image_widget.dart';
 import 'package:tire_website/ui/shared_widgets/custom_text.dart';
 import 'package:tire_website/ui/shared_widgets/side_menu.dart';
@@ -38,21 +42,68 @@ class ProductWidgetMobile extends StatelessWidget {
                   color: Colors.white,
                   size: 22.0,
                 ),
-                trailing: IconButton(
-                  onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute<Widget>(
-                        builder: (BuildContext context) => const CartPage()));
-                  },
-                  icon: const Icon(
-                    Icons.shopping_cart_outlined,
-                    color: Colors.white,
-                    size: 25,
-                  ),
-                ),
+                trailing: StreamBuilder<DocumentSnapshot>(
+                    stream: ProductRepo().cartStream(),
+                    builder: (BuildContext context,
+                        AsyncSnapshot<DocumentSnapshot> snapshot) {
+                      if (snapshot.data != null) {
+                        final ProductModel product = ProductModel.fromMap(
+                          snapshot.data.data(),
+                        );
+                        return Stack(
+                          children: <Widget>[
+                            IconButton(
+                              onPressed: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute<Widget>(
+                                    builder: (BuildContext context) =>
+                                        const CartPage(),
+                                  ),
+                                );
+                              },
+                              icon: const Icon(
+                                Icons.shopping_cart_outlined,
+                                color: Colors.white,
+                                size: 30,
+                              ),
+                            ),
+                            Container(
+                              width: 20,
+                              height: 20,
+                              decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.red,
+                              ),
+                              child: Center(
+                                child: CustomText(
+                                  text: '${product.cartCount}',
+                                  fontWeight: FontWeight.w300,
+                                  color: Colors.white,
+                                  size: 10.0,
+                                ),
+                              ),
+                            ),
+                          ],
+                        );
+                      }
+                      return IconButton(
+                        onPressed: () {
+                          Navigator.of(context).push(MaterialPageRoute<Widget>(
+                              builder: (BuildContext context) =>
+                                  const CartPage()));
+                        },
+                        icon: const Icon(
+                          Icons.shopping_cart_outlined,
+                          color: Colors.white,
+                          size: 30,
+                        ),
+                      );
+                    }),
                 sliderMenu: SideMenuMobile(),
                 sliderMain: Container(
                   width: double.infinity,
-                    color: Colors.white, child: ProductPageBodyMobile(type: type),
+                  color: Colors.white,
+                  child: ProductPageBodyMobile(type: type),
                 ),
               ),
             ),
@@ -171,14 +222,33 @@ class ProductWidget extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              CustomButton(
-                title: 'Add To Cart',
-                fontSize: 11,
-                radius: 4.0,
-                height: 30.0,
-                buttonColor: Theme.of(context).primaryColor.withOpacity(0.7),
-                onPress: () {
-                  //TODO: add to cart function
+              BlocConsumer<ProductBloc, ProductState>(
+                listener: (BuildContext context, ProductState state) {
+                  if (state is ErrorAddProductToCartState) {
+                    print('error');
+                    CustomWarningDialog.showSnackBar(
+                      context: context,
+                      message: state.message,
+                    );
+                  }
+                },
+                builder: (BuildContext context, ProductState state) {
+                  if (state is LoadingAddProductToCartState &&
+                      state.id == product.productId) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                  return CustomButton(
+                    title: 'Add To Cart',
+                    fontSize: 11,
+                    radius: 4.0,
+                    height: 30.0,
+                    buttonColor:
+                        Theme.of(context).primaryColor.withOpacity(0.7),
+                    onPress: () {
+                      BlocProvider.of<ProductBloc>(context)
+                          .add(AddProductToCart(product));
+                    },
+                  );
                 },
               ),
               CustomButton(
@@ -199,11 +269,40 @@ class ProductWidget extends StatelessWidget {
   }
 }
 
-class Body extends StatelessWidget {
+class Body extends StatefulWidget {
   Body({this.type});
 
   final String type;
-  final ValueNotifier<String> sortValueNotifier = ValueNotifier<String>('Size');
+
+  @override
+  _BodyState createState() => _BodyState();
+}
+
+class _BodyState extends State<Body> {
+  final ValueNotifier<String> sortValueNotifier = ValueNotifier<String>('Date');
+
+  final ValueNotifier<Query> sortResultNotifier = ValueNotifier<Query>(
+    FirebaseFirestore.instance.collection('products').orderBy('timestamp'),
+  );
+
+  final ValueNotifier<bool> refreshNotifier = ValueNotifier<bool>(false);
+
+  Future<void> set() async {
+    refreshNotifier.value = true;
+    await Future.delayed(Duration(milliseconds: 500));
+    print(widget.type);
+    sortResultNotifier.value = FirebaseFirestore.instance
+        .collection('products')
+        .where('type', isEqualTo: widget.type.toLowerCase())
+        .orderBy('timestamp');
+    refreshNotifier.value = false;
+  }
+
+  @override
+  void initState() {
+    set();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -215,48 +314,54 @@ class Body extends StatelessWidget {
         physics: const BouncingScrollPhysics(),
         children: <Widget>[
           const SizedBox(height: 10.0),
-          const Center(
+          Center(
             child: CustomText(
-              text: 'Tyres',
+              text: widget.type ?? 'Tyres',
               size: 20.0,
             ),
           ),
           const SizedBox(height: 12.0),
           dropDown(context),
           const SizedBox(height: 50.0),
-          PaginateFirestore(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemBuilderType: PaginateBuilderType.gridView,
-            padding: const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 100.0),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              crossAxisSpacing: 10.0,
-              mainAxisSpacing: 10.0,
-              childAspectRatio: 0.8,
-            ),
-            bottomLoader: const SizedBox(
-              height: 50,
-              width: 50,
-              child: Center(child: CircularProgressIndicator()),
-            ),
-            initialLoader: const Center(child: CircularProgressIndicator()),
-            onError: (Exception e) {
-              return Center(child: CustomText(text: e.toString()));
+          ValueListenableBuilder<bool>(
+            valueListenable: refreshNotifier,
+            builder: (BuildContext context, bool loading, Widget child) {
+              if (loading == true) {
+                return const Center(child: CircularProgressIndicator());
+              }
+
+              return PaginateFirestore(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemBuilderType: PaginateBuilderType.gridView,
+                padding: const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 100.0),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 10.0,
+                  mainAxisSpacing: 10.0,
+                  childAspectRatio: 0.8,
+                ),
+                bottomLoader: const SizedBox(
+                  height: 50,
+                  width: 50,
+                  child: Center(child: CircularProgressIndicator()),
+                ),
+                initialLoader: const Center(child: CircularProgressIndicator()),
+                onError: (Exception e) {
+                  return Center(child: CustomText(text: e.toString()));
+                },
+                itemBuilder: (
+                  int index,
+                  BuildContext context,
+                  DocumentSnapshot documentSnapshot,
+                ) {
+                  return ProductWidget(
+                    ProductModel.fromMap(documentSnapshot.data()),
+                  );
+                },
+                query: sortResultNotifier.value,
+              );
             },
-            itemBuilder: (
-              int index,
-              BuildContext context,
-              DocumentSnapshot documentSnapshot,
-            ) {
-              return ProductWidget(
-                  ProductModel.fromMap(documentSnapshot.data()));
-            },
-            //TODO: update query to use type passed
-            query: FirebaseFirestore.instance
-                .collection('products')
-                .orderBy('productName'),
-            // isLive: true // to fetch real-time data
           ),
         ],
       ),
@@ -292,7 +397,8 @@ class Body extends StatelessWidget {
                   iconEnabledColor: Colors.black,
                   value: sortInput,
                   underline: const SizedBox(),
-                  items: <String>['Size', 'Price', 'Name'].map((String value) {
+                  items: <String>['Date', 'Size', 'Price', 'Name']
+                      .map((String value) {
                     return DropdownMenuItem<String>(
                       value: value,
                       child: CustomText(
@@ -302,7 +408,34 @@ class Body extends StatelessWidget {
                   }).toList(),
                   onChanged: (String val) {
                     sortValueNotifier.value = val;
-                    //TODO: update result list
+
+                    if (val.toLowerCase() == 'size') {
+                      print(widget.type);
+                      sortResultNotifier.value = FirebaseFirestore.instance
+                          .collection('products')
+                          .where('type',
+                              isEqualTo: widget.type.toUpperCase() ?? 'types')
+                          .orderBy('size');
+                    } else if (val.toLowerCase() == 'price') {
+                      sortResultNotifier.value = FirebaseFirestore.instance
+                          .collection('products')
+                          .where('type',
+                              isEqualTo: widget.type.toUpperCase() ?? 'types')
+                          .orderBy('price');
+                    } else if (val.toLowerCase() == 'name') {
+                      sortResultNotifier.value = FirebaseFirestore.instance
+                          .collection('products')
+                          .where('type',
+                              isEqualTo: widget.type.toUpperCase() ?? 'types')
+                          .orderBy('productName');
+                    } else if (val.toLowerCase() == 'date') {
+                      sortResultNotifier.value = FirebaseFirestore.instance
+                          .collection('products')
+                          .where('type',
+                              isEqualTo: widget.type.toUpperCase() ?? 'types')
+                          .orderBy('timestamp');
+                    }
+                    set();
                   },
                 );
               },

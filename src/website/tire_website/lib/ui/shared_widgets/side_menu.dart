@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:tire_website/ui/order/orders_page.dart';
+import 'package:tire_website/business_logic/auth/model/route.dart';
 import 'package:tire_website/ui/shared_widgets/custom_text.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 import 'hover_widget.dart';
 
@@ -49,27 +50,45 @@ class SideMenu extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 20.0),
-                  const CustomHover(
-                    child: CustomText(
-                      text: 'Tyres',
-                      size: 18.0,
-                      fontWeight: FontWeight.w500,
+                  CustomHover(
+                    child: InkWell(
+                      onTap: () {
+                        VxNavigator.of(context)
+                            .push(Uri.parse(RouteClass.productTyresPage));
+                      },
+                      child: const CustomText(
+                        text: 'Tyres',
+                        size: 18.0,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
                   const SizedBox(height: 20.0),
-                  const CustomHover(
-                    child: CustomText(
-                      text: 'Products',
-                      size: 18.0,
-                      fontWeight: FontWeight.w500,
+                  CustomHover(
+                    child: InkWell(
+                      onTap: () {
+                        VxNavigator.of(context)
+                            .push(Uri.parse(RouteClass.productTubePage));
+                      },
+                      child: const CustomText(
+                        text: 'Tubes',
+                        size: 18.0,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
                   const SizedBox(height: 20.0),
-                  const CustomHover(
-                    child: CustomText(
-                      text: 'Rims',
-                      size: 18.0,
-                      fontWeight: FontWeight.w500,
+                  CustomHover(
+                    child: InkWell(
+                      onTap: () {
+                        VxNavigator.of(context)
+                            .push(Uri.parse(RouteClass.productRimPage));
+                      },
+                      child: const CustomText(
+                        text: 'Rims',
+                        size: 18.0,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
                 ],
@@ -80,9 +99,8 @@ class SideMenu extends StatelessWidget {
                   children: <Widget>[
                     InkWell(
                       onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute<Widget>(
-                            builder: (BuildContext context) =>
-                                const OrdersPage()));
+                        VxNavigator.of(context)
+                            .push(Uri.parse(RouteClass.ordersPage));
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -105,15 +123,18 @@ class SideMenu extends StatelessWidget {
                 child: Column(
                   children: <Widget>[
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        VxNavigator.of(context)
+                            .push(Uri.parse(RouteClass.authPage));
+                      },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: <Widget>[
                           const Icon(Icons.exit_to_app_outlined),
                           const CustomText(
-                            text: 'Log Out',
+                            text: 'Log In',
                             size: 22.0,
-                            color: Colors.red,
+                            // color: Colors.red,
                             fontWeight: FontWeight.bold,
                           ),
                           Container(),
@@ -173,27 +194,45 @@ class SideMenuTablet extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 20.0),
-                  const CustomHover(
-                    child: CustomText(
-                      text: 'Tyres',
-                      size: 16.0,
-                      fontWeight: FontWeight.w500,
+                  CustomHover(
+                    child: InkWell(
+                      onTap: () {
+                        VxNavigator.of(context)
+                            .push(Uri.parse(RouteClass.productTyresPage));
+                      },
+                      child: const CustomText(
+                        text: 'Tyres',
+                        size: 16.0,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
                   const SizedBox(height: 20.0),
-                  const CustomHover(
-                    child: CustomText(
-                      text: 'Products',
-                      size: 16.0,
-                      fontWeight: FontWeight.w500,
+                  CustomHover(
+                    child: InkWell(
+                      onTap: () {
+                        VxNavigator.of(context)
+                            .push(Uri.parse(RouteClass.productTubePage));
+                      },
+                      child: const CustomText(
+                        text: 'Tubes',
+                        size: 16.0,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
                   const SizedBox(height: 20.0),
-                  const CustomHover(
-                    child: CustomText(
-                      text: 'Rims',
-                      size: 16.0,
-                      fontWeight: FontWeight.w500,
+                  CustomHover(
+                    child: InkWell(
+                      onTap: () {
+                        VxNavigator.of(context)
+                            .push(Uri.parse(RouteClass.productRimPage));
+                      },
+                      child: const CustomText(
+                        text: 'Rims',
+                        size: 16.0,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
                 ],
@@ -204,9 +243,8 @@ class SideMenuTablet extends StatelessWidget {
                   children: <Widget>[
                     InkWell(
                       onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute<Widget>(
-                            builder: (BuildContext context) =>
-                                const OrdersPage()));
+                        VxNavigator.of(context)
+                            .push(Uri.parse(RouteClass.ordersPage));
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -229,15 +267,18 @@ class SideMenuTablet extends StatelessWidget {
                 child: Column(
                   children: <Widget>[
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        VxNavigator.of(context)
+                            .push(Uri.parse(RouteClass.authPage));
+                      },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: <Widget>[
                           const Icon(Icons.exit_to_app_outlined),
                           const CustomText(
-                            text: 'Log Out',
+                            text: 'Log In',
                             size: 20.0,
-                            color: Colors.red,
+                            // color: Colors.red,
                             fontWeight: FontWeight.bold,
                           ),
                           Container(),
@@ -297,27 +338,45 @@ class SideMenuMobile extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 20.0),
-                  const CustomHover(
-                    child: CustomText(
-                      text: 'Tyres',
-                      size: 16.0,
-                      fontWeight: FontWeight.w500,
+                  CustomHover(
+                    child: InkWell(
+                      onTap: () {
+                        VxNavigator.of(context)
+                            .push(Uri.parse(RouteClass.productTyresPage));
+                      },
+                      child: const CustomText(
+                        text: 'Tyres',
+                        size: 16.0,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
                   const SizedBox(height: 20.0),
-                  const CustomHover(
-                    child: CustomText(
-                      text: 'Products',
-                      size: 16.0,
-                      fontWeight: FontWeight.w500,
+                  CustomHover(
+                    child: InkWell(
+                      onTap: () {
+                        VxNavigator.of(context)
+                            .push(Uri.parse(RouteClass.productTubePage));
+                      },
+                      child: const CustomText(
+                        text: 'Tubes',
+                        size: 16.0,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
                   const SizedBox(height: 20.0),
-                  const CustomHover(
-                    child: CustomText(
-                      text: 'Rims',
-                      size: 16.0,
-                      fontWeight: FontWeight.w500,
+                  CustomHover(
+                    child: InkWell(
+                      onTap: () {
+                        VxNavigator.of(context)
+                            .push(Uri.parse(RouteClass.productRimPage));
+                      },
+                      child: const CustomText(
+                        text: 'Rims',
+                        size: 16.0,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
                 ],
@@ -328,9 +387,8 @@ class SideMenuMobile extends StatelessWidget {
                   children: <Widget>[
                     InkWell(
                       onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute<Widget>(
-                            builder: (BuildContext context) =>
-                                const OrdersPage()));
+                        VxNavigator.of(context)
+                            .push(Uri.parse(RouteClass.ordersPage));
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -353,15 +411,18 @@ class SideMenuMobile extends StatelessWidget {
                 child: Column(
                   children: <Widget>[
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        VxNavigator.of(context)
+                            .push(Uri.parse(RouteClass.authPage));
+                      },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: <Widget>[
                           const Icon(Icons.exit_to_app_outlined),
                           const CustomText(
-                            text: 'Log Out',
+                            text: 'LogIn',
                             size: 20.0,
-                            color: Colors.red,
+                            // color: ,
                             fontWeight: FontWeight.bold,
                           ),
                           Container(),

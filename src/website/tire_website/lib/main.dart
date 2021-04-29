@@ -11,5 +11,8 @@ Future<void> main() async {
   await Firebase.initializeApp();
   ServiceLocator.setup();
 
+  // runApp(VxState(store: store, child: WebApp()));
   runApp(WebApp());
 }
+
+// VxStore store = VxStore();

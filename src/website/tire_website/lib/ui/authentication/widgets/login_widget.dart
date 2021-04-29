@@ -1,10 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:tire_website/business_logic/auth/model/route.dart';
 import 'package:tire_website/business_logic/auth/repo/authentication_repo.dart';
-import 'package:tire_website/ui/home/pages/home_page.dart';
 import 'package:tire_website/ui/shared_widgets/custom_button.dart';
 import 'package:tire_website/ui/shared_widgets/custom_dialog.dart';
 import 'package:tire_website/ui/shared_widgets/custom_textfield.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 import '../../shared_widgets/custom_text.dart';
 
@@ -72,11 +73,7 @@ class _LoginPageFormState extends State<LoginPageForm> {
       try {
         await auth.loginWithEmailAndPassword(email: email, password: password);
         debugPrint('Login successfull');
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute<Widget>(
-            builder: (_) => HomePage(),
-          ),
-        );
+        VxNavigator.of(context).push(Uri.parse(RouteClass.productTyresPage));
       } catch (e) {
         debugPrint(e.toString());
         CustomWarningDialog.showCustomDialog(

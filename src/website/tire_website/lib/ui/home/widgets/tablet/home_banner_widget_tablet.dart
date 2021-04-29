@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:tire_website/business_logic/auth/model/route.dart';
 import 'package:tire_website/ui/shared_widgets/custom_button.dart';
 import 'package:tire_website/ui/shared_widgets/custom_text.dart';
+import 'package:tire_website/ui/shared_widgets/hover_widget.dart';
 import 'package:tire_website/utils/constant_helper.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class HomeBannerWidgetTablet extends StatelessWidget {
   const HomeBannerWidgetTablet();
@@ -62,13 +65,20 @@ class HomeBannerWidgetTablet extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 25.0),
-              CustomButton(
-                width: 200.0,
-                radius: 50.0,
-                onPress: () {},
-                fontWeight: FontWeight.w300,
-                fontSize: ksTabletTextSizeSmall,
-                title: 'Get Started',
+              CustomHover(
+                color: Theme.of(context).accentColor,
+                center: false,
+                child: CustomButton(
+                  width: 200.0,
+                  radius: 50.0,
+                  onPress: () {
+                    VxNavigator.of(context)
+                        .push(Uri.parse(RouteClass.productTyresPage));
+                  },
+                  fontWeight: FontWeight.w300,
+                  fontSize: ksDesktopTextSizeSmall,
+                  title: 'Get Started',
+                ),
               ),
             ],
           ),

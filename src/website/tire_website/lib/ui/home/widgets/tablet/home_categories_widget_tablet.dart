@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:tire_website/ui/product/pages/product_page.dart';
-import 'package:tire_website/ui/product/pages/rims_page.dart';
-import 'package:tire_website/ui/product/pages/tyres_page.dart';
+import 'package:tire_website/business_logic/auth/model/route.dart';
 import 'package:tire_website/ui/shared_widgets/custom_button.dart';
 import 'package:tire_website/ui/shared_widgets/custom_image_widget.dart';
 import 'package:tire_website/ui/shared_widgets/custom_text.dart';
 import 'package:tire_website/utils/eums.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class HomeCategoriesWidgetTablet extends StatelessWidget {
   const HomeCategoriesWidgetTablet();
@@ -93,29 +92,19 @@ class HomeCategoriesWidgetTablet extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: 30.0,
+                height: 40.0,
                 width: 100.0,
                 child: CustomButton(
                   onPress: () {
                     if (title.toLowerCase() == 'tubes') {
-                      Navigator.of(context).push(
-                        MaterialPageRoute<Widget>(
-                          builder: (BuildContext context) =>
-                              const ProductPage(),
-                        ),
-                      );
+                      VxNavigator.of(context)
+                          .push(Uri.parse(RouteClass.productTubePage));
                     } else if (title.toLowerCase() == 'tyres') {
-                      Navigator.of(context).push(
-                        MaterialPageRoute<Widget>(
-                          builder: (BuildContext context) => const TyresPage(),
-                        ),
-                      );
+                      VxNavigator.of(context)
+                          .push(Uri.parse(RouteClass.productTyresPage));
                     } else if (title.toLowerCase() == 'rims') {
-                      Navigator.of(context).push(
-                        MaterialPageRoute<Widget>(
-                          builder: (BuildContext context) => const RimsPage(),
-                        ),
-                      );
+                      VxNavigator.of(context)
+                          .push(Uri.parse(RouteClass.productRimPage));
                     }
                   },
                   title: 'Check Out',

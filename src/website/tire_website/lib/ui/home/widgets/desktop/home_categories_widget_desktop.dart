@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:tire_website/ui/product/pages/rims_page.dart';
-import 'package:tire_website/ui/product/pages/product_page.dart';
-import 'package:tire_website/ui/product/pages/tyres_page.dart';
+import 'package:tire_website/business_logic/auth/model/route.dart';
 import 'package:tire_website/ui/shared_widgets/custom_button.dart';
 import 'package:tire_website/ui/shared_widgets/custom_image_widget.dart';
 import 'package:tire_website/ui/shared_widgets/custom_text.dart';
+import 'package:tire_website/ui/shared_widgets/hover_widget.dart';
 import 'package:tire_website/utils/eums.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class HomeCategoriesWidgetDesktop extends StatelessWidget {
   const HomeCategoriesWidgetDesktop();
@@ -65,7 +65,7 @@ class HomeCategoriesWidgetDesktop extends StatelessWidget {
           ),
         ),
         Container(
-          height: 333.0,
+          height: 343.0,
           width: 225.0,
           decoration: BoxDecoration(
             color: Colors.white,
@@ -93,33 +93,28 @@ class HomeCategoriesWidgetDesktop extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: 38.0,
+                height: 48.0,
                 width: 128.0,
-                child: CustomButton(
-                  onPress: () {
-                    if (title.toLowerCase() == 'tubes') {
-                      Navigator.of(context).push(
-                        MaterialPageRoute<Widget>(
-                          builder: (BuildContext context) => const ProductPage(),
-                        ),
-                      );
-                    } else if (title.toLowerCase() == 'tyres') {
-                      Navigator.of(context).push(
-                        MaterialPageRoute<Widget>(
-                          builder: (BuildContext context) => const TyresPage(),
-                        ),
-                      );
-                    } else if (title.toLowerCase() == 'rims') {
-                      Navigator.of(context).push(
-                        MaterialPageRoute<Widget>(
-                          builder: (BuildContext context) => const RimsPage(),
-                        ),
-                      );
-                    }
-                  },
-                  title: 'Check Out',
-                  fontSize: 13.0,
-                  fontWeight: FontWeight.w600,
+                child: CustomHover(
+                  color: Theme.of(context).accentColor,
+                  center: false,
+                  child: CustomButton(
+                    onPress: () {
+                      if (title.toLowerCase() == 'tubes') {
+                        VxNavigator.of(context)
+                            .push(Uri.parse(RouteClass.productTubePage));
+                      } else if (title.toLowerCase() == 'tyres') {
+                        VxNavigator.of(context)
+                            .push(Uri.parse(RouteClass.productTyresPage));
+                      } else if (title.toLowerCase() == 'rims') {
+                        VxNavigator.of(context)
+                            .push(Uri.parse(RouteClass.productRimPage));
+                      }
+                    },
+                    title: 'Check Out',
+                    fontSize: 13.0,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
             ],
