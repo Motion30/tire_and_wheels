@@ -1,13 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f6e2764e-7ed4-4737-8c45-1a1edd888dd9" name="Default Changelist" comment="" />
+    <list default="true" id="f6e2764e-7ed4-4737-8c45-1a1edd888dd9" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/tire_and_wheel.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/tire_and_wheel.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/website/tire_website/lib/ui/home/pages/home_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/src/website/tire_website/lib/ui/home/pages/home_page.dart" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Dart File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1qbkbYSJLPE64AxP2jKrPRaH0kf" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -17,12 +35,25 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="dart.analysis.tool.window.visible" value="false" />
+    <property name="io.flutter.reload.alreadyRun" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/website/tire_website" />
     <property name="settings.editor.selected.configurable" value="dart.settings" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\olamilekan\flutter_projects\work_space\tire_and_wheel\src\website\tire_website\assets\images" />
+      <recent name="C:\Users\olamilekan\flutter_projects\work_space\tire_and_wheel\src\website\tire_website\lib\ui\home\widgets\desktop" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\olamilekan\flutter_projects\work_space\tire_and_wheel\src\website\tire_website\lib\ui" />
+      <recent name="C:\Users\olamilekan\flutter_projects\work_space\tire_and_wheel\src\website\tire_website\lib" />
+      <recent name="C:\Users\olamilekan\flutter_projects\work_space\tire_and_wheel\src\website\tire_website\lib\business_logic" />
+      <recent name="C:\Users\olamilekan\flutter_projects\work_space\tire_and_wheel\src\website\tire_website" />
+    </key>
+  </component>
   <component name="RunManager">
-    <configuration name="Unnamed" type="FlutterRunConfigurationType" factoryName="Flutter">
+    <configuration name="main" type="FlutterRunConfigurationType" factoryName="Flutter">
       <option name="filePath" value="$PROJECT_DIR$/src/website/tire_website/lib/main.dart" />
       <method v="2" />
     </configuration>
@@ -41,17 +72,49 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="137" y="19" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1617355935726">
+    <state x="137" y="19" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1618757944354">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="137" y="19" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1617355935726" />
+    <state x="137" y="19" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1618757944354" />
     <state x="412" y="153" key="#com.intellij.ide.util.TreeFileChooserDialog" timestamp="1617355882675">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="412" y="153" key="#com.intellij.ide.util.TreeFileChooserDialog/0.0.1366.728@0.0.1366.728" timestamp="1617355882675" />
+    <state x="424" y="223" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1617359496611">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="424" y="223" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1366.728@0.0.1366.728" timestamp="1617359496611" />
+    <state x="463" y="119" key="FileChooserDialogImpl" timestamp="1618757967172">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1618757967172" />
+    <state width="838" height="156" key="GridCell.Tab.0.bottom" timestamp="1618879908714">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="838" height="156" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1618879908714" />
+    <state width="838" height="156" key="GridCell.Tab.0.center" timestamp="1618879908714">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="838" height="156" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1618879908714" />
+    <state width="838" height="156" key="GridCell.Tab.0.left" timestamp="1618879908713">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="838" height="156" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1618879908713" />
+    <state width="838" height="156" key="GridCell.Tab.0.right" timestamp="1618879908714">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="838" height="156" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1618879908714" />
     <state x="206" y="8" key="SettingsEditor" timestamp="1617355920874">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="206" y="8" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1617355920874" />
+    <state x="330" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1618869867815">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="330" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1366.728@0.0.1366.728" timestamp="1618869867815" />
+    <state x="339" y="162" key="run.anything.popup" timestamp="1617612181620">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1617612181620" />
   </component>
 </project>

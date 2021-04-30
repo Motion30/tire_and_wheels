@@ -1,5 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.wheels_and_tires_admin">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
    <application
         android:label="wheels_and_tires_admin"
         android:icon="@mipmap/ic_launcher">
