@@ -53,7 +53,7 @@ class AuthenticationRepo {
       final User user = result.user;
       debugPrint(user.uid);
       await getUserDetails(uid: user.uid);
-      await NotificationClass().subscribeToChannel('admin_123456');
+      // await NotificationClass().subscribeToChannel('admin_123456');
       // await _getIt.get<NotificationClass>().subscribeToChannel(user.uid);
 
       return userFromFirebase(user);
@@ -99,7 +99,7 @@ class AuthenticationRepo {
         );
 
         await writeUserDataToDataBase(userData: userData);
-        await NotificationClass().subscribeToChannel('admin_123456');
+        // await NotificationClass().subscribeToChannel('admin_123456');
         // await _getIt.get<NotificationClass>().subscribeToChannel(user.uid);
 
         // await HiveMethods().saveUserDataToLocalDb(userData: userData.toMap());

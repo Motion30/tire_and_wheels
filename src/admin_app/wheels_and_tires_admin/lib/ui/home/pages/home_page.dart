@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wheels_and_tires_admin/ui/home/pages/chat_page.dart';
 import 'package:wheels_and_tires_admin/ui/home/pages/orders_page.dart';
 import 'package:wheels_and_tires_admin/ui/home/pages/store_page.dart';
 import 'package:wheels_and_tires_admin/ui/home/pages/upload_page.dart';
@@ -17,6 +18,7 @@ class _HomePageState extends State<HomePage>
     Tab(icon: Icon(Icons.cloud_upload)),
     Tab(icon: Icon(Icons.store_outlined)),
     Tab(icon: Icon(Icons.shopping_cart_outlined)),
+    Tab(icon: Icon(Icons.chat_bubble_outline)),
   ];
 
   @override
@@ -49,6 +51,7 @@ class _HomePageState extends State<HomePage>
             UploadPage(),
             StorePage(),
             OrdersPage(),
+            ChatPage(),
           ],
         ),
       ),

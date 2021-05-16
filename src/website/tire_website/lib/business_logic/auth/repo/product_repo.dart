@@ -107,9 +107,12 @@ class ProductRepo {
     final WriteBatch batch = FirebaseFirestore.instance.batch();
     final String userUid = AuthenticationRepo().getUserUid();
 
+    final Map<String, dynamic> data = order.toMap();
+    data['timestamp'] = Timestamp.now();
+
     batch.set(
       ordersRef.doc(),
-      order.toMap(),
+      data,
     );
 
     batch.update(

@@ -19,6 +19,7 @@ class ChatRepo {
     final String id = Uuid().createCryptoRandomString(8);
 
     final ChatModel chatModel = ChatModel(
+      chatsDocId: userId,
       message: message,
       id: id,
       senderId: userId,
@@ -43,8 +44,8 @@ class ChatRepo {
     await chatRef.doc(userId).collection('messages').add(chatModel.toMap());
   }
 
-  Stream getChats() async* {
-    final String userId = AuthenticationRepo().getUserUid();
-    yield chatRef.doc(userId).snapshots();
-  }
+  // Stream getChats() async* {
+  //   final String userId = AuthenticationRepo().getUserUid();
+  //   yield chatRef.doc(userId).snapshots();
+  // }
 }

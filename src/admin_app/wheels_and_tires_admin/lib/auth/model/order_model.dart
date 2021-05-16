@@ -14,15 +14,15 @@ class OrderModel {
     return OrderModel(
       userData: map['userData'] as Map<String, dynamic>,
       address: map['address'] as Map<String, dynamic>,
-      products: map['products'] as List<Map<String, dynamic>>,
+      products: map['products'] as List<dynamic>,
       status: map['status'] as String,
-      timestamp: map['timestamp'] as Timestamp,
+      timestamp: map['timestampe'] as Timestamp ?? Timestamp.now(),
     );
   }
 
   final Map<String, dynamic> userData;
   final Map<String, dynamic> address;
-  final List<Map<String, dynamic>> products;
+  final List<dynamic> products;
   final String status;
   final Timestamp timestamp;
 
@@ -32,7 +32,7 @@ class OrderModel {
       'address': address,
       'products': products,
       'status': status,
-      'timestamp': timestamp,
+      'timestampe': timestamp,
     };
   }
 }
