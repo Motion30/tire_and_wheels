@@ -72,7 +72,7 @@ class _ChatTextFieldState extends State<ChatTextField> {
               ),
               child: Center(
                 child: Transform.rotate(
-                  angle: -40 * pi / 180,
+                  angle: -0 * pi / 180,
                   child: const Icon(
                     Icons.send_sharp,
                     color: Colors.white,
