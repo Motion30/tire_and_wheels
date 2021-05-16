@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:tire_website/business_logic/auth/repo/authentication_repo.dart';
 
 class OrderModel {
-
   const OrderModel({
     @required this.userData,
     @required this.address,
@@ -23,13 +23,15 @@ class OrderModel {
   final List<Map<String, dynamic>> products;
   final String status;
 
-
   Map<String, dynamic> toMap() {
+    final String userUid = AuthenticationRepo().getUserUid();
+
     return <String, dynamic>{
       'userData': userData,
       'address': address,
       'products': products,
       'status': status,
-    } ;
+      'userId': userUid,
+    };
   }
 }

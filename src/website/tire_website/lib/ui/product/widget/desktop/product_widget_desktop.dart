@@ -49,6 +49,7 @@ class ProductPageBodyDesktop extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class ProductWidget extends StatelessWidget {
   ProductWidget(this.product);
 
@@ -148,7 +149,6 @@ class ProductWidget extends StatelessWidget {
               BlocConsumer<ProductBloc, ProductState>(
                 listener: (BuildContext context, ProductState state) {
                   if (state is ErrorAddProductToCartState) {
-                    print('error');
                     CustomWarningDialog.showSnackBar(
                       context: context,
                       message: state.message,
@@ -193,7 +193,7 @@ class ProductWidget extends StatelessWidget {
 }
 
 class Body extends StatefulWidget {
-  Body({this.type});
+  const Body({this.type});
 
   final String type;
 
@@ -212,7 +212,7 @@ class _BodyState extends State<Body> {
 
   Future<void> set() async {
     refreshNotifier.value = true;
-    await Future.delayed(Duration(milliseconds: 500));
+    await Future<dynamic>.delayed(const Duration(milliseconds: 500));
     sortResultNotifier.value = FirebaseFirestore.instance
         .collection('products')
         .where('type', isEqualTo: widget.type.toLowerCase())

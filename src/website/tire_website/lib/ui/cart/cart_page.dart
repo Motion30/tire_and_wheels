@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:tire_website/business_logic/auth/bloc/product_bloc.dart';
 import 'package:tire_website/business_logic/auth/model/product_model.dart';
+import 'package:tire_website/business_logic/auth/model/route.dart';
 import 'package:tire_website/business_logic/auth/repo/authentication_repo.dart';
 import 'package:tire_website/ui/shared_widgets/custom_button.dart';
 import 'package:tire_website/ui/shared_widgets/custom_dialog.dart';
@@ -12,6 +13,7 @@ import 'package:tire_website/ui/shared_widgets/custom_image_widget.dart';
 import 'package:tire_website/ui/shared_widgets/custom_text.dart';
 import 'package:tire_website/ui/shared_widgets/responsive_widget.dart';
 import 'package:tire_website/utils/eums.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class CartPage extends StatelessWidget {
   const CartPage();
@@ -46,7 +48,10 @@ class CartPage extends StatelessWidget {
                 CustomButton(
                   height: 30,
                   width: 150,
-                  onPress: () {},
+                  onPress: () {
+                    VxNavigator.of(context)
+                        .push(Uri.parse(RouteClass.orderSummary));
+                  },
                   title: 'Buy all now',
                   fontSize: 15.0,
                   buttonColor: Theme.of(context).primaryColor.withOpacity(0.7),
@@ -64,6 +69,14 @@ class CartPage extends StatelessWidget {
                 crossAxisSpacing: 10.0,
                 mainAxisSpacing: 10.0,
                 childAspectRatio: 1.1,
+              ),
+              emptyDisplay: const Center(
+                child: CustomText(
+                  text: 'Opps, No item Found!',
+                  fontWeight: FontWeight.w300,
+                  size: 30,
+                  textAlign: TextAlign.center,
+                ),
               ),
               bottomLoader: const SizedBox(
                 height: 50,
@@ -115,7 +128,10 @@ class CartPage extends StatelessWidget {
                 CustomButton(
                   height: 30,
                   width: 150,
-                  onPress: () {},
+                  onPress: () {
+                    VxNavigator.of(context)
+                        .push(Uri.parse(RouteClass.orderSummary));
+                  },
                   title: 'Buy all now',
                   fontSize: 13.0,
                   buttonColor: Theme.of(context).primaryColor.withOpacity(0.7),
@@ -133,6 +149,23 @@ class CartPage extends StatelessWidget {
                 crossAxisSpacing: 10.0,
                 mainAxisSpacing: 10.0,
                 childAspectRatio: 0.8,
+              ),
+              emptyDisplay: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  const SizedBox(height: 50.0),
+                  Icon(
+                    Icons.shopping_cart,
+                    size: 60,
+                    color: Colors.grey[600],
+                  ),
+                  const CustomText(
+                    text: 'Opps, No item Found!',
+                    fontWeight: FontWeight.w300,
+                    size: 30,
+                    textAlign: TextAlign.center,
+                  ),
+                ],
               ),
               bottomLoader: const SizedBox(
                 height: 50,
@@ -166,6 +199,7 @@ class CartPage extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class CartProductWidget extends StatelessWidget {
   CartProductWidget(this.cartItem, {this.width, this.height});
 
@@ -264,7 +298,6 @@ class CartProductWidget extends StatelessWidget {
           BlocConsumer<ProductBloc, ProductState>(
             listener: (BuildContext context, ProductState state) {
               if (state is ErrorDeleteProductFromCartState) {
-                print('error');
                 CustomWarningDialog.showSnackBar(
                   context: context,
                   message: state.message,

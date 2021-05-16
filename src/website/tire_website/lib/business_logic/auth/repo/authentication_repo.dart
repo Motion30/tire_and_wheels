@@ -29,7 +29,7 @@ class AuthenticationRepo {
   }
 
   String getUserUid() {
-    return _auth.currentUser.uid;
+    return _auth.currentUser?.uid;
   }
 
   Future<Map<String, dynamic>> getLoginUserDetails() async {

@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:wheels_and_tires_admin/auth/model/login_user_model.dart';
 import 'package:wheels_and_tires_admin/auth/model/user_details_model.dart';
+import 'package:wheels_and_tires_admin/notifictaion.dart';
 import 'package:wheels_and_tires_admin/utils/firestore_document_value.dart';
 // import 'package:get_it/get_it.dart';
 
@@ -52,6 +53,7 @@ class AuthenticationRepo {
       final User user = result.user;
       debugPrint(user.uid);
       await getUserDetails(uid: user.uid);
+      await NotificationClass().subscribeToChannel('admin_123456');
       // await _getIt.get<NotificationClass>().subscribeToChannel(user.uid);
 
       return userFromFirebase(user);
@@ -97,6 +99,7 @@ class AuthenticationRepo {
         );
 
         await writeUserDataToDataBase(userData: userData);
+        await NotificationClass().subscribeToChannel('admin_123456');
         // await _getIt.get<NotificationClass>().subscribeToChannel(user.uid);
 
         // await HiveMethods().saveUserDataToLocalDb(userData: userData.toMap());

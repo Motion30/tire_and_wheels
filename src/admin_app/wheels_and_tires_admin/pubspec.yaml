@@ -30,9 +30,11 @@ dependencies:
   cupertino_icons: ^1.0.2
 
   # firebase packages
-  firebase_core: ^1.0.0
-  firebase_auth: ^1.0.1
-  cloud_firestore: ^1.0.3
+  firebase_core: ^1.1.0
+  firebase_auth: ^1.1.4
+  firebase_storage: ^8.0.0
+  cloud_firestore: ^1.0.0
+  firebase_messaging: ^6.0.16
 
   # state management
   provider: 4.3.3
@@ -50,27 +52,27 @@ dependencies:
   #  hive: ^1.4.4+1
 
   # http package
-  dio: ^4.0.0
+  # dio: ^4.0.0
 
   # Service Locator
-  get_it: ^5.0.6
+  # get_it: ^5.0.6
 
   # image packages
-  carousel_pro: ^1.0.0
-  cached_network_image: ^2.5.0
-  flutter_svg: ^0.19.3
+  # carousel_pro: ^1.0.0
+  # cached_network_image: 
+  # flutter_svg: ^0.19.3
 
   # navigator 2.0
-  velocity_x: ^2.6.1
-  url_strategy: ^0.2.0
+  # velocity_x: ^2.6.1
+  # url_strategy: ^0.2.0
 
 
-  flutter_slider_drawer: ^2.0.0
+  # flutter_slider_drawer: ^2.0.0
 
-  hovering: ^1.0.4
+  # hovering: ^1.0.4
 
-  image_picker:
-  firebase_storage: 8.0.5
+  image_picker: ^0.7.5 
+  # firebase_storage: 
 
   # paiganting
   paginate_firestore: ^0.3.1

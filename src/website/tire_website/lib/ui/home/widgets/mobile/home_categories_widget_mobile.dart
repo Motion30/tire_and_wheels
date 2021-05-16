@@ -26,16 +26,16 @@ class HomeCategoriesWidgetMobile extends StatelessWidget {
             children: <Widget>[
               categoriesItem(
                 context,
-                'Tubes',
-                'assets/images/tubes.png',
-                color: const Color.fromRGBO(119, 55, 255, 1),
+                'Tyres',
+                'assets/images/tyres.png',
+                color: const Color.fromRGBO(15, 0, 193, 0.8),
               ),
               const SizedBox(height: 20.0),
               categoriesItem(
                 context,
-                'Tyres',
-                'assets/images/tyres.png',
-                color: const Color.fromRGBO(15, 0, 193, 0.8),
+                'Tubes',
+                'assets/images/tubes.png',
+                color: const Color.fromRGBO(119, 55, 255, 1),
               ),
               const SizedBox(height: 20.0),
               categoriesItem(

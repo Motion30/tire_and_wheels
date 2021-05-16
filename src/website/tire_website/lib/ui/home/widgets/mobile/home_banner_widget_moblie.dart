@@ -72,7 +72,8 @@ class HomeBannerWidgetMobile extends StatelessWidget {
                   width: 200.0,
                   radius: 50.0,
                   onPress: () {
-                    VxNavigator.of(context).push(Uri.parse(RouteClass.home));
+                    VxNavigator.of(context)
+                        .push(Uri.parse(RouteClass.productTyresPage));
                   },
                   fontWeight: FontWeight.w300,
                   fontSize: ksMobileTextSizeSmall,

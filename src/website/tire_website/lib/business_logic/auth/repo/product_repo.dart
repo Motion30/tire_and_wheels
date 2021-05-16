@@ -10,6 +10,8 @@ class ProductRepo {
       FirebaseFirestore.instance.collection('product');
   static final CollectionReference userRef =
       FirebaseFirestore.instance.collection('userData');
+  static final CollectionReference ordersRef =
+      FirebaseFirestore.instance.collection('orders');
 
   Future<void> addProductToCart(ProductModel product) async {
     final WriteBatch batch = FirebaseFirestore.instance.batch();
@@ -82,6 +84,52 @@ class ProductRepo {
   Stream<DocumentSnapshot> cartStream() async* {
     final String userId = AuthenticationRepo().getUserUid();
 
-    yield* userRef.doc(userId).snapshots();
+    if (userId != null) {
+      yield* userRef.doc(userId).snapshots();
+    }
+  }
+
+  Future<List<CartModel>> getCartItems() async {
+    final List<CartModel> cartItem = <CartModel>[];
+    final String userUid = AuthenticationRepo().getUserUid();
+
+    final QuerySnapshot querySnapshot =
+        await userRef.doc(userUid).collection('cart').get();
+
+    cartItem.addAll(querySnapshot.docs
+        .map((QueryDocumentSnapshot e) => CartModel.fromMap(e.data()))
+        .toList());
+
+    return cartItem;
+  }
+
+  Future<void> addOrder(OrderModel order) async {
+    final WriteBatch batch = FirebaseFirestore.instance.batch();
+    final String userUid = AuthenticationRepo().getUserUid();
+
+    batch.set(
+      ordersRef.doc(),
+      order.toMap(),
+    );
+
+    batch.update(
+      userRef.doc(userUid),
+      <String, dynamic>{'cartCount': 0},
+    );
+
+    final QuerySnapshot querySnapshot =
+        await userRef.doc(userUid).collection('cart').get();
+
+    final List<QueryDocumentSnapshot> docs = querySnapshot.docs;
+
+    for (int i = 0; i < docs.length; i++) {
+      final QueryDocumentSnapshot currentDoc = docs[i];
+
+      batch.delete(
+        userRef.doc(userUid).collection('cart').doc(currentDoc.id),
+      );
+    }
+
+    await batch.commit();
   }
 }

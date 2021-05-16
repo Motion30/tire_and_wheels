@@ -15,7 +15,7 @@ class HomePageHeaderDesktop extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Theme.of(context).primaryColor,
-      padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 25.0),
+      padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 25.0),
       child: Column(
         children: <Widget>[
           Row(
@@ -32,6 +32,10 @@ class HomePageHeaderDesktop extends StatelessWidget {
               ///
 
               CustomHover(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 8.0,
+                  vertical: 10.0,
+                ),
                 color: Theme.of(context).primaryColor.withOpacity(0.4),
                 child: CustomTextButton(
                   callback: () {
@@ -45,8 +49,12 @@ class HomePageHeaderDesktop extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(width: 15.0),
+              const SizedBox(width: 5.0),
               CustomHover(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 8.0,
+                  vertical: 10.0,
+                ),
                 color: Theme.of(context).primaryColor.withOpacity(0.4),
                 child: CustomTextButton(
                   callback: () {
@@ -61,7 +69,7 @@ class HomePageHeaderDesktop extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(width: 15.0),
+              const SizedBox(width: 5.0),
               CustomHover(
                 color: Theme.of(context).primaryColor.withOpacity(0.4),
                 child: CustomTextButton(
@@ -74,8 +82,12 @@ class HomePageHeaderDesktop extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(width: 15.0),
+              const SizedBox(width: 5.0),
               CustomHover(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 8.0,
+                  vertical: 10.0,
+                ),
                 color: Theme.of(context).primaryColor.withOpacity(0.4),
                 child: CustomTextButton(
                   callback: () {},
@@ -87,11 +99,15 @@ class HomePageHeaderDesktop extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(width: 15.0),
+              const SizedBox(width: 5.0),
 
               ///
-              const SizedBox(width: 15.0),
+              const SizedBox(width: 5.0),
               CustomHover(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 8.0,
+                  vertical: 10.0,
+                ),
                 color: Theme.of(context).primaryColor.withOpacity(0.4),
                 child: CustomButton(
                   onPress: () {
@@ -104,8 +120,12 @@ class HomePageHeaderDesktop extends StatelessWidget {
                   fontSize: ksDesktopTextSizeTiny,
                 ),
               ),
-              const SizedBox(width: 15.0),
+              const SizedBox(width: 5.0),
               CustomHover(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 8.0,
+                  vertical: 10.0,
+                ),
                 color: Theme.of(context).primaryColor.withOpacity(0.4),
                 child: CustomButton(
                   onPress: () {
@@ -121,7 +141,7 @@ class HomePageHeaderDesktop extends StatelessWidget {
           ),
 
           ///
-          const SizedBox(height: 15.0),
+          const SizedBox(height: 5.0),
           const HomePageSearchBar(),
         ],
       ),

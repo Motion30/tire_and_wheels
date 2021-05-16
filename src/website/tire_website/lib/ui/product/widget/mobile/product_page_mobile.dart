@@ -14,6 +14,9 @@ import 'package:tire_website/ui/shared_widgets/custom_text.dart';
 import 'package:tire_website/ui/shared_widgets/side_menu.dart';
 import 'package:tire_website/utils/eums.dart';
 
+import '../../../../business_logic/auth/repo/authentication_repo.dart';
+import '../../../shared_widgets/custom_dialog.dart';
+
 class ProductWidgetMobile extends StatelessWidget {
   ProductWidgetMobile({this.type});
 
@@ -88,9 +91,19 @@ class ProductWidgetMobile extends StatelessWidget {
                       }
                       return IconButton(
                         onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute<Widget>(
-                              builder: (BuildContext context) =>
-                                  const CartPage()));
+                          if (AuthenticationRepo().getUserUid() != null) {
+                            Navigator.of(context).push(
+                              MaterialPageRoute<Widget>(
+                                builder: (BuildContext context) =>
+                                    const CartPage(),
+                              ),
+                            );
+                          } else {
+                            CustomWarningDialog.showSnackBar(
+                              message: 'Please Login or Sigup',
+                              context: context,
+                            );
+                          }
                         },
                         icon: const Icon(
                           Icons.shopping_cart_outlined,
@@ -225,7 +238,6 @@ class ProductWidget extends StatelessWidget {
               BlocConsumer<ProductBloc, ProductState>(
                 listener: (BuildContext context, ProductState state) {
                   if (state is ErrorAddProductToCartState) {
-                    print('error');
                     CustomWarningDialog.showSnackBar(
                       context: context,
                       message: state.message,
@@ -270,7 +282,7 @@ class ProductWidget extends StatelessWidget {
 }
 
 class Body extends StatefulWidget {
-  Body({this.type});
+  const Body({this.type});
 
   final String type;
 
@@ -289,8 +301,8 @@ class _BodyState extends State<Body> {
 
   Future<void> set() async {
     refreshNotifier.value = true;
-    await Future.delayed(Duration(milliseconds: 500));
-    print(widget.type);
+    await Future<dynamic>.delayed(const Duration(milliseconds: 500));
+
     sortResultNotifier.value = FirebaseFirestore.instance
         .collection('products')
         .where('type', isEqualTo: widget.type.toLowerCase())
@@ -410,7 +422,6 @@ class _BodyState extends State<Body> {
                     sortValueNotifier.value = val;
 
                     if (val.toLowerCase() == 'size') {
-                      print(widget.type);
                       sortResultNotifier.value = FirebaseFirestore.instance
                           .collection('products')
                           .where('type',

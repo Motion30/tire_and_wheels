@@ -31,3 +31,12 @@ class DeleteProductFromCartEvent extends ProductEvent {
   @override
   List<Object> get props => <Object>[id];
 }
+
+class AddOrderEvent extends ProductEvent {
+  const AddOrderEvent(this.order);
+
+  final OrderModel order;
+
+  @override
+  List<Object> get props => <Object>[];
+}

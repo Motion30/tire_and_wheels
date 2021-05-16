@@ -3,14 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:wheels_and_tires_admin/auth/repo/authentication_repo.dart';
+import 'package:wheels_and_tires_admin/notifictaion.dart';
 import 'package:wheels_and_tires_admin/ui/authentication/pages/wrapper.dart';
 
 import 'auth/model/login_user_model.dart';
 import 'bloc_list.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Firebase.initializeApp();
+  await Firebase.initializeApp();
+  NotificationClass().init();
   runApp(MyApp());
 }
 

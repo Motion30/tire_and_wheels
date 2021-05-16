@@ -27,17 +27,18 @@ class HomeCategoriesWidgetDesktop extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
               categoriesItem(
-                'Tubes',
-                'assets/images/tubes.png',
-                color: const Color.fromRGBO(119, 55, 255, 1),
-                context: context,
-              ),
-              categoriesItem(
                 'Tyres',
                 'assets/images/tyres.png',
                 color: const Color.fromRGBO(15, 0, 193, 0.8),
                 context: context,
               ),
+              categoriesItem(
+                'Tubes',
+                'assets/images/tubes.png',
+                color: const Color.fromRGBO(119, 55, 255, 1),
+                context: context,
+              ),
+              
               categoriesItem(
                 'Rims',
                 'assets/images/rims.png',

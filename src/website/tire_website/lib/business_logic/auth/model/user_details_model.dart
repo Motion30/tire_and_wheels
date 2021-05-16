@@ -19,6 +19,7 @@ class UserDetails {
   String userName;
   int phoneNumber;
   String profilePicUrl;
+
   String backgroundPic;
   Timestamp timestamp;
 

@@ -4,8 +4,11 @@ import 'package:tire_website/bloc_list.dart';
 import 'package:tire_website/business_logic/auth/model/route.dart';
 import 'package:tire_website/ui/authentication/pages/wrapper.dart';
 import 'package:tire_website/ui/cart/cart_page.dart';
+import 'package:tire_website/ui/chat/chat_page.dart';
 import 'package:tire_website/ui/home/pages/home_page.dart';
 import 'package:tire_website/ui/order/orders_page.dart';
+import 'package:tire_website/ui/order_summary/order_sent_page.dart';
+import 'package:tire_website/ui/order_summary/order_summary_page.dart';
 import 'package:tire_website/ui/product/pages/product_page.dart';
 import 'package:tire_website/ui/settings/settings_page.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -59,14 +62,18 @@ class _WebAppState extends State<WebApp> {
       RouteClass.productTubePage: (Uri uri, dynamic params) =>
           const MaterialPage<Widget>(child: ProductPage(type: 'Tubes')),
       RouteClass.cartPage: (Uri uri, dynamic params) {
-        print(uri);
-        print(params);
         return const MaterialPage<Widget>(child: CartPage());
       },
       RouteClass.settingsPage: (Uri uri, dynamic params) =>
           const MaterialPage<Widget>(child: SettingsPage()),
       RouteClass.ordersPage: (Uri uri, dynamic params) =>
           const MaterialPage<Widget>(child: OrdersPage()),
+      RouteClass.orderSummary: (Uri uri, dynamic params) =>
+          const MaterialPage<Widget>(child: OrderSummaryPage()),
+      RouteClass.orderComplete: (Uri uri, dynamic params) =>
+          const MaterialPage<Widget>(child: OrderCompletePage()),
+      RouteClass.chat: (Uri uri, dynamic params) =>
+          const MaterialPage<Widget>(child: ChatPage()),
     },
   );
 }

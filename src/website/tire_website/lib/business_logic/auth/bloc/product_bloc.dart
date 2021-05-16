@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:tire_website/business_logic/auth/model/address_model.dart';
+import 'package:tire_website/business_logic/auth/model/order_model.dart';
 import 'package:tire_website/business_logic/auth/model/product_model.dart';
 import 'package:tire_website/business_logic/auth/repo/product_repo.dart';
 
@@ -40,7 +41,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         debugPrint(s.toString());
         yield ErrorAddProductToOrderState(e?.message.toString());
       }
-    }else if (event is DeleteProductFromCartEvent) {
+    } else if (event is DeleteProductFromCartEvent) {
       try {
         yield LoadingDeleteProductFromCartState(event.id);
         await ProductRepo().deleteProductFromCart(event.id);
@@ -49,6 +50,16 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         debugPrint(e.toString());
         debugPrint(s.toString());
         yield ErrorDeleteProductFromCartState(e?.message.toString());
+      }
+    } else if (event is AddOrderEvent) {
+      try {
+        yield LoadingAddOrderState();
+        await ProductRepo().addOrder(event.order);
+        yield LoadedAddOrderState();
+      } catch (e, s) {
+        debugPrint(e.toString());
+        debugPrint(s.toString());
+        yield ErrorAddOrderState(e?.message.toString());
       }
     }
   }

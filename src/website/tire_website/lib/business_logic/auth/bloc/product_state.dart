@@ -74,7 +74,6 @@ class LoadingDeleteProductFromCartState extends ProductState {
 
   final String id;
 
-
   @override
   List<Object> get props => <Object>[];
 }
@@ -87,6 +86,30 @@ class LoadedDeleteProductFromCartState extends ProductState {
 class ErrorDeleteProductFromCartState extends ProductState {
   const ErrorDeleteProductFromCartState(this.message);
 
+  final String message;
+
+  @override
+  List<Object> get props => <Object>[];
+}
+
+///
+class InitialAddOrderState extends ProductState {
+  @override
+  List<Object> get props => <Object>[];
+}
+
+class LoadingAddOrderState extends ProductState {
+  @override
+  List<Object> get props => <Object>[];
+}
+
+class LoadedAddOrderState extends ProductState {
+  @override
+  List<Object> get props => <Object>[];
+}
+
+class ErrorAddOrderState extends ProductState {
+  const ErrorAddOrderState(this.message);
   final String message;
 
   @override

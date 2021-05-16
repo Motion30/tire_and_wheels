@@ -10,4 +10,7 @@ class RouteClass {
   static const String settingsPage = '/setting';
   static const String ordersPage = '/orders';
   static const String paymentPage = '/payment';
+  static const String orderSummary = '/order-summary';
+  static const String orderComplete = '/order_complete';
+  static const String chat = '/chat';
 }
