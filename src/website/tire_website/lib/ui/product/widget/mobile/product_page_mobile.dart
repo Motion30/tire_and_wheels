@@ -11,6 +11,7 @@ import 'package:tire_website/ui/shared_widgets/custom_button.dart';
 import 'package:tire_website/ui/shared_widgets/custom_dialog.dart';
 import 'package:tire_website/ui/shared_widgets/custom_image_widget.dart';
 import 'package:tire_website/ui/shared_widgets/custom_text.dart';
+import 'package:tire_website/ui/shared_widgets/logo_widget.dart';
 import 'package:tire_website/ui/shared_widgets/side_menu.dart';
 import 'package:tire_website/utils/eums.dart';
 
@@ -28,7 +29,6 @@ class ProductWidgetMobile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SizedBox(
-        // height: MediaQuery.of(context).size.height,
         child: ListView(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
@@ -40,11 +40,7 @@ class ProductWidgetMobile extends StatelessWidget {
                 drawerIconColor: Colors.white,
                 key: _key,
                 sliderMenuOpenSize: 200,
-                title: const CustomText(
-                  text: 'Tyres and wheels',
-                  color: Colors.white,
-                  size: 22.0,
-                ),
+                title: const LogoWidget(),
                 trailing: StreamBuilder<DocumentSnapshot>(
                     stream: ProductRepo().cartStream(),
                     builder: (BuildContext context,
@@ -71,19 +67,18 @@ class ProductWidgetMobile extends StatelessWidget {
                               ),
                             ),
                             Container(
+                              alignment: Alignment.center,
                               width: 20,
                               height: 20,
                               decoration: const BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: Colors.red,
                               ),
-                              child: Center(
-                                child: CustomText(
-                                  text: '${product.cartCount}',
-                                  fontWeight: FontWeight.w300,
-                                  color: Colors.white,
-                                  size: 10.0,
-                                ),
+                              child: CustomText(
+                                text: '${product.cartCount}',
+                                fontWeight: FontWeight.w300,
+                                color: Colors.white,
+                                size: 10.0,
                               ),
                             ),
                           ],
@@ -147,135 +142,152 @@ class ProductWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
+
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+      padding: const EdgeInsets.symmetric(horizontal: 5.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(5.0),
         border: Border.all(color: Theme.of(context).primaryColor),
       ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: <Widget>[
-          SizedBox(
-            width: 180.0,
-            height: 120.0,
-            child: CustomImageWidget(
-              imageWidgetType: ImageWidgetType.network,
-              imageUrl: product.images.first,
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 10.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+            SizedBox(
+              width: size.width * 0.22,
+              height: size.height * 0.25,
+              child: CustomImageWidget(
+                imageWidgetType: ImageWidgetType.network,
+                imageUrl: product.images.first,
+              ),
             ),
-          ),
-          Column(
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  CustomText(
-                    text: 'Name',
-                    size: 15,
-                    color: Theme.of(context).accentColor,
-                  ),
-                  CustomText(
-                    text: product.productName,
-                    size: 13,
-                    fontWeight: FontWeight.w300,
-                    color: Theme.of(context).accentColor,
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  CustomText(
-                    text: 'Brand',
-                    size: 15,
-                    color: Theme.of(context).accentColor,
-                  ),
-                  CustomText(
-                    text: product.productBrand,
-                    size: 13,
-                    fontWeight: FontWeight.w300,
-                    color: Theme.of(context).accentColor,
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  CustomText(
-                    text: 'Size',
-                    size: 15,
-                    color: Theme.of(context).accentColor,
-                  ),
-                  CustomText(
-                    text: '${product.size}r',
-                    size: 13,
-                    fontWeight: FontWeight.w300,
-                    color: Theme.of(context).accentColor,
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  CustomText(
-                    text: 'Price',
-                    size: 15,
-                    color: Theme.of(context).accentColor,
-                  ),
-                  CustomText(
-                    text: '#${product.price}',
-                    size: 13,
-                    fontWeight: FontWeight.w300,
-                    color: Theme.of(context).accentColor,
-                  ),
-                ],
-              ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              BlocConsumer<ProductBloc, ProductState>(
-                listener: (BuildContext context, ProductState state) {
-                  if (state is ErrorAddProductToCartState) {
-                    CustomWarningDialog.showSnackBar(
-                      context: context,
-                      message: state.message,
+            Column(
+              children: <Widget>[
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //   children: <Widget>[
+                //     CustomText(
+                //       text: 'Name',
+                //       size: 15,
+                //       color: Theme.of(context).accentColor,
+                //     ),
+                //     CustomText(
+                //       text: product.productName,
+                //       size: 13,
+                //       fontWeight: FontWeight.w300,
+                //       color: Theme.of(context).accentColor,
+                //     ),
+                //   ],
+                // ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    CustomText(
+                      text: 'Brand',
+                      size: 15,
+                      color: Theme.of(context).accentColor,
+                    ),
+                    CustomText(
+                      text: product.productBrand,
+                      size: 13,
+                      fontWeight: FontWeight.w300,
+                      color: Theme.of(context).accentColor,
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    CustomText(
+                      text: 'Size',
+                      size: 15,
+                      color: Theme.of(context).accentColor,
+                    ),
+                    CustomText(
+                      text: '${product.size}r',
+                      size: 13,
+                      fontWeight: FontWeight.w300,
+                      color: Theme.of(context).accentColor,
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    CustomText(
+                      text: '\u20A6',
+                      size: 15,
+                      color: Theme.of(context).accentColor,
+                    ),
+                    CustomText(
+                      text: '${product.price}',
+                      size: 15,
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).accentColor,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                BlocConsumer<ProductBloc, ProductState>(
+                  listener: (BuildContext context, ProductState state) {
+                    if (state is ErrorAddProductToCartState) {
+                      CustomWarningDialog.showSnackBar(
+                        context: context,
+                        message: state.message,
+                      );
+                    }
+                  },
+                  builder: (BuildContext context, ProductState state) {
+                    if (state is LoadingAddProductToCartState &&
+                        state.id == product.productId) {
+                      return const Center(child: CircularProgressIndicator());
+                    }
+                    return CustomButton(
+                      title: 'Add To Cart',
+                      fontSize: 10,
+                      radius: 2.0,
+                      height: 25.0,
+                      buttonColor: Theme.of(context).primaryColor,
+                      onPress: () {
+                        BlocProvider.of<ProductBloc>(context)
+                            .add(AddProductToCart(product));
+                      },
                     );
-                  }
-                },
-                builder: (BuildContext context, ProductState state) {
-                  if (state is LoadingAddProductToCartState &&
-                      state.id == product.productId) {
-                    return const Center(child: CircularProgressIndicator());
-                  }
-                  return CustomButton(
-                    title: 'Add To Cart',
-                    fontSize: 11,
-                    radius: 4.0,
-                    height: 30.0,
-                    buttonColor:
-                        Theme.of(context).primaryColor.withOpacity(0.7),
-                    onPress: () {
-                      BlocProvider.of<ProductBloc>(context)
-                          .add(AddProductToCart(product));
-                    },
-                  );
-                },
-              ),
-              CustomButton(
-                title: 'Buy Now',
-                fontSize: 11,
-                radius: 4.0,
-                height: 30.0,
-                buttonColor: Theme.of(context).primaryColor.withOpacity(0.7),
-                onPress: () {
-                  //TODO: buy now function
-                },
-              ),
-            ],
-          ),
-        ],
+                  },
+                ),
+                CustomButton(
+                  title: 'Buy Now',
+                  fontSize: 10,
+                  radius: 2.0,
+                  height: 25.0,
+                  buttonColor: Theme.of(context).accentColor,
+                  onPress: () {
+                    //TODO: buy now function
+                  },
+                ),
+              ],
+            ),
+            const SizedBox(height: 5.0),
+            CustomButton(
+              title: 'Check Out',
+              fontSize: 11,
+              radius: 2.0,
+              height: 30.0,
+              width: 80.0,
+              buttonColor: Theme.of(context).primaryColor,
+              onPress: () {
+                //TODO: check out function
+              },
+            ),
+            const SizedBox(height: 3.0),
+          ],
+        ),
       ),
     );
   }
@@ -351,7 +363,7 @@ class _BodyState extends State<Body> {
                   crossAxisCount: 2,
                   crossAxisSpacing: 10.0,
                   mainAxisSpacing: 10.0,
-                  childAspectRatio: 0.8,
+                  childAspectRatio: 0.7,
                 ),
                 bottomLoader: const SizedBox(
                   height: 50,

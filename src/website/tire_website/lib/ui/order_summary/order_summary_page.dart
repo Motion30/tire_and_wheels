@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tire_website/business_logic/auth/bloc/product_bloc.dart';
@@ -151,12 +152,18 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
   }
 }
 
-class CustomCardTablet extends StatelessWidget {
-  CustomCardTablet({this.userData, this.cartList});
+class CustomCardTablet extends StatefulWidget {
+  const CustomCardTablet({this.userData, this.cartList});
 
   final UserDetails userData;
   final List<CartModel> cartList;
 
+  @override
+  _CustomCardTabletState createState() => _CustomCardTabletState();
+}
+
+class _CustomCardTabletState extends State<CustomCardTablet> {
+  ValueNotifier<PaymentType> paymentType = ValueNotifier<PaymentType>(null);
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final TextEditingController addressController = TextEditingController();
   final TextEditingController fullNameController = TextEditingController();
@@ -167,7 +174,7 @@ class CustomCardTablet extends StatelessWidget {
 
   void validate(BuildContext context) {
     final FormState formState = formKey.currentState;
-    if (formState.validate()) {
+    if (formState.validate() && paymentType.value != null) {
       final String fullName = fullNameController.text.trim();
       final String phone = phoneController.text.trim();
       final String _address = addressController.text.trim();
@@ -188,8 +195,10 @@ class CustomCardTablet extends StatelessWidget {
       final OrderModel order = OrderModel(
         userData: userData,
         address: address,
-        products: cartList.map((CartModel e) => e.toMap()).toList(),
+        products: widget.cartList.map((CartModel e) => e.toMap()).toList(),
         status: 'pending',
+        paymentType:
+            paymentType.value == PaymentType.bankTransfer ? 'transfer' : 'cash',
       );
 
       BlocProvider.of<ProductBloc>(context).add(AddOrderEvent(order));
@@ -203,13 +212,19 @@ class CustomCardTablet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    phoneController.text = userData.phoneNumber.toString() ?? '';
-    fullNameController.text = userData.fullName ?? '';
+    phoneController.text = widget.userData.phoneNumber.toString() ?? '';
+    fullNameController.text = widget.userData.fullName ?? '';
 
     int total = 0;
 
-    for (final CartModel e in cartList) {
+    for (final CartModel e in widget.cartList) {
       total += e.price;
+    }
+
+    if (kDebugMode) {
+      addressController.text = 'tanke, oke odo. close to item 7';
+      stateController.text = 'kwara';
+      cityController.text = 'ilorin';
     }
 
     return Container(
@@ -290,6 +305,45 @@ class CustomCardTablet extends StatelessWidget {
                       length: 2,
                     ),
                     const SizedBox(height: 15.0),
+                    ValueListenableBuilder<PaymentType>(
+                      valueListenable: paymentType,
+                      builder: (
+                        BuildContext context,
+                        PaymentType value,
+                        Widget child,
+                      ) {
+                        return Row(
+                          children: <Widget>[
+                            Expanded(
+                              child: RadioListTile<bool>(
+                                value: value == PaymentType.bankTransfer,
+                                groupValue: true,
+                                title: const CustomText(
+                                  text: 'Transfer',
+                                  size: 14.0,
+                                  color: Colors.blue,
+                                ),
+                                onChanged: (_) => paymentType.value =
+                                    PaymentType.bankTransfer,
+                              ),
+                            ),
+                            Expanded(
+                              child: RadioListTile<bool>(
+                                value: value == PaymentType.cashOnDevivery,
+                                groupValue: true,
+                                title: const CustomText(
+                                  text: 'Cash',
+                                  size: 14.0,
+                                  color: Colors.blue,
+                                ),
+                                onChanged: (_) => paymentType.value =
+                                    PaymentType.cashOnDevivery,
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                    ),
                   ],
                 ),
               ),
@@ -309,9 +363,9 @@ class CustomCardTablet extends StatelessWidget {
                   const Divider(),
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
-              itemCount: cartList.length,
+              itemCount: widget.cartList.length,
               itemBuilder: (BuildContext context, int index) {
-                final CartModel cartItem = cartList[index];
+                final CartModel cartItem = widget.cartList[index];
 
                 return Row(
                   children: <Widget>[

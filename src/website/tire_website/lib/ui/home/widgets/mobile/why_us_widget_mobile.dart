@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tire_website/ui/home/contants.dart';
 import 'package:tire_website/ui/shared_widgets/custom_image_widget.dart';
 import 'package:tire_website/ui/shared_widgets/custom_text.dart';
 import 'package:tire_website/utils/eums.dart';
@@ -24,21 +25,21 @@ class HomeWhyUsWidgetMobile extends StatelessWidget {
             children: <Widget>[
               item(
                 context,
-                'Order a product with ease',
-                'assets/images/corona.png',
-                'Get to products to more people and watch your products sell faster',
+                'CONVENIENCE',
+                'assets/images/con.png',
+                convenienceText,
               ),
               item(
                 context,
-                'Get quality products at affordable prices',
+                'VAST SELECTION',
+                'assets/images/van.png',
+                vastText,
+              ),
+              item(
+                context,
+                'EARN REWARDS!',
                 'assets/images/money_bag.png',
-                'Get to products to more people and watch your products sell faster',
-              ),
-              item(
-                context,
-                'Dedicated Support',
-                'assets/images/chat.png',
-                'Get to products to more people and watch your products sell faster',
+                earnText,
               ),
             ],
           ),

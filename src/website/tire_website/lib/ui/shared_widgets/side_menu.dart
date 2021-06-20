@@ -134,7 +134,7 @@ class SideMenu extends StatelessWidget {
                           const CustomText(
                             text: 'Log In',
                             size: 22.0,
-                            // color: Colors.red,
+                            color: Colors.red,
                             fontWeight: FontWeight.bold,
                           ),
                           Container(),
@@ -278,7 +278,7 @@ class SideMenuTablet extends StatelessWidget {
                           const CustomText(
                             text: 'Log In',
                             size: 20.0,
-                            // color: Colors.red,
+                            color: Colors.red,
                             fontWeight: FontWeight.bold,
                           ),
                           Container(),
@@ -422,7 +422,7 @@ class SideMenuMobile extends StatelessWidget {
                           const CustomText(
                             text: 'LogIn',
                             size: 20.0,
-                            // color: ,
+                            color: Colors.red,
                             fontWeight: FontWeight.bold,
                           ),
                           Container(),

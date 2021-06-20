@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tire_website/business_logic/auth/model/route.dart';
+import 'package:tire_website/ui/home/contants.dart';
 import 'package:tire_website/ui/shared_widgets/custom_button.dart';
 import 'package:tire_website/ui/shared_widgets/custom_text.dart';
 import 'package:tire_website/ui/shared_widgets/hover_widget.dart';
@@ -24,7 +25,7 @@ class HomeBannerWidgetMobile extends StatelessWidget {
           fit: BoxFit.fill,
         ),
         Container(
-          padding: const EdgeInsets.symmetric(horizontal: 50.0, vertical: 20.0),
+          padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 20.0),
           width: double.infinity,
           height: 400.0,
           decoration: BoxDecoration(
@@ -42,10 +43,9 @@ class HomeBannerWidgetMobile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               SizedBox(
-                width: MediaQuery.of(context).size.width * 0.63,
+                width: MediaQuery.of(context).size.width * 0.80,
                 child: const CustomText(
-                  text:
-                      'We are your one stop shop for quality Tyres, Tubes and Rims',
+                  text: homeTitle,
                   size: ksMobileTextSizeExtraLarge - 2,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
@@ -54,12 +54,11 @@ class HomeBannerWidgetMobile extends StatelessWidget {
               ),
               const SizedBox(height: 20.0),
               SizedBox(
-                width: MediaQuery.of(context).size.width * 0.40,
+                width: MediaQuery.of(context).size.width * 0.80,
                 child: const CustomText(
-                  text:
-                      'An all in one system that optimizes your products on your favourite selling platforms easily accessible, efficient and affordable.',
+                  text: homeSubtitle,
                   size: ksMobileTextSizeTiny + 2,
-                  fontWeight: FontWeight.w300,
+                  fontWeight: FontWeight.w200,
                   color: Colors.white,
                   textAlign: TextAlign.left,
                 ),

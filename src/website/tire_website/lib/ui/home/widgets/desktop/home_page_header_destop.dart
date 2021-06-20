@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tire_website/business_logic/auth/model/route.dart';
 import 'package:tire_website/ui/home/widgets/shared_widget/home_page_search_bar.dart';
 import 'package:tire_website/ui/shared_widgets/custom_button.dart';
@@ -6,6 +7,7 @@ import 'package:tire_website/ui/shared_widgets/custom_text.dart';
 import 'package:tire_website/ui/shared_widgets/custom_text_button.dart';
 import 'package:tire_website/ui/shared_widgets/hover_widget.dart';
 import 'package:tire_website/utils/constant_helper.dart';
+import 'package:tire_website/utils/constants.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class HomePageHeaderDesktop extends StatelessWidget {
@@ -20,7 +22,11 @@ class HomePageHeaderDesktop extends StatelessWidget {
         children: <Widget>[
           Row(
             children: <Widget>[
-              const SizedBox(height: 25.0, width: 25.0, child: Placeholder()),
+              SizedBox(
+                height: 25.0,
+                width: 25.0,
+                child: SvgPicture.asset(logoImage),
+              ),
               const SizedBox(width: 10.0),
               const CustomText(
                 text: 'Tyres and wheels',

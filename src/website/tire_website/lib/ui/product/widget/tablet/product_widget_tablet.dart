@@ -56,6 +56,7 @@ class ProductWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10.0),
       decoration: BoxDecoration(
@@ -66,80 +67,85 @@ class ProductWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           SizedBox(
-            width: 180.0,
-            height: 120.0,
+            width: size.width * 0.22,
+            height: size.height * 0.30,
             child: CustomImageWidget(
               imageWidgetType: ImageWidgetType.network,
               imageUrl: product.images.first,
             ),
           ),
-          Column(
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  CustomText(
-                    text: 'Name',
-                    size: 16,
-                    color: Theme.of(context).accentColor,
-                  ),
-                  CustomText(
-                    text: product.productName,
-                    size: 14,
-                    fontWeight: FontWeight.w300,
-                    color: Theme.of(context).accentColor,
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  CustomText(
-                    text: 'Brand',
-                    size: 16,
-                    color: Theme.of(context).accentColor,
-                  ),
-                  CustomText(
-                    text: product.productBrand,
-                    size: 14,
-                    fontWeight: FontWeight.w300,
-                    color: Theme.of(context).accentColor,
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  CustomText(
-                    text: 'Size',
-                    size: 16,
-                    color: Theme.of(context).accentColor,
-                  ),
-                  CustomText(
-                    text: '${product.size}r',
-                    size: 14,
-                    fontWeight: FontWeight.w300,
-                    color: Theme.of(context).accentColor,
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  CustomText(
-                    text: 'Price',
-                    size: 16,
-                    color: Theme.of(context).accentColor,
-                  ),
-                  CustomText(
-                    text: '#${product.price}',
-                    size: 14,
-                    fontWeight: FontWeight.w300,
-                    color: Theme.of(context).accentColor,
-                  ),
-                ],
-              ),
-            ],
+          const Spacer(),
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 10.0),
+            child: Column(
+              children: <Widget>[
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //   children: <Widget>[
+                //     CustomText(
+                //       text: 'Name',
+                //       size: 16,
+                //       color: Theme.of(context).accentColor,
+                //     ),
+                //     CustomText(
+                //       text: product.productName,
+                //       size: 14,
+                //       fontWeight: FontWeight.w300,
+                //       color: Theme.of(context).accentColor,
+                //     ),
+                //   ],
+                // ),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    CustomText(
+                      text: 'Brand',
+                      size: 16,
+                      color: Theme.of(context).accentColor,
+                    ),
+                    CustomText(
+                      text: product.productBrand,
+                      size: 14,
+                      fontWeight: FontWeight.w300,
+                      color: Theme.of(context).accentColor,
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    CustomText(
+                      text: 'Size',
+                      size: 16,
+                      color: Theme.of(context).accentColor,
+                    ),
+                    CustomText(
+                      text: '${product.size}r',
+                      size: 14,
+                      fontWeight: FontWeight.w300,
+                      color: Theme.of(context).accentColor,
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    CustomText(
+                      text: '\u20A6',
+                      size: 16,
+                      color: Theme.of(context).accentColor,
+                    ),
+                    CustomText(
+                      text: '${product.price}',
+                      size: 14,
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).accentColor,
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -163,8 +169,7 @@ class ProductWidget extends StatelessWidget {
                     fontSize: 11,
                     radius: 4.0,
                     height: 30.0,
-                    buttonColor:
-                        Theme.of(context).primaryColor.withOpacity(0.7),
+                    buttonColor: Theme.of(context).primaryColor,
                     onPress: () {
                       BlocProvider.of<ProductBloc>(context)
                           .add(AddProductToCart(product));
@@ -177,13 +182,26 @@ class ProductWidget extends StatelessWidget {
                 fontSize: 11,
                 radius: 4.0,
                 height: 30.0,
-                buttonColor: Theme.of(context).primaryColor.withOpacity(0.7),
+                buttonColor: Theme.of(context).accentColor,
                 onPress: () {
                   //TODO: buy now function
                 },
               ),
             ],
           ),
+          const SizedBox(height: 10.0),
+          CustomButton(
+            title: 'Check Out',
+            fontSize: 11,
+            radius: 4.0,
+            height: 30.0,
+            width: 80.0,
+            buttonColor: Theme.of(context).primaryColor,
+            onPress: () {
+              //TODO: check out function
+            },
+          ),
+          const SizedBox(height: 10.0),
         ],
       ),
     );
@@ -258,7 +276,7 @@ class _BodyState extends State<Body> {
                   crossAxisCount: 2,
                   crossAxisSpacing: 10.0,
                   mainAxisSpacing: 10.0,
-                  childAspectRatio: 0.8,
+                  childAspectRatio: 0.65,
                 ),
                 bottomLoader: const SizedBox(
                   height: 50,

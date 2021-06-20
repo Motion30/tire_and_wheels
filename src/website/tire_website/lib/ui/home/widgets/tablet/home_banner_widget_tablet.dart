@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tire_website/business_logic/auth/model/route.dart';
+import 'package:tire_website/ui/home/contants.dart';
 import 'package:tire_website/ui/shared_widgets/custom_button.dart';
 import 'package:tire_website/ui/shared_widgets/custom_text.dart';
 import 'package:tire_website/ui/shared_widgets/hover_widget.dart';
@@ -44,8 +45,7 @@ class HomeBannerWidgetTablet extends StatelessWidget {
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.63,
                 child: const CustomText(
-                  text:
-                      'We are your one stop shop for quality Tyres, Tubes and Rims',
+                  text: homeTitle,
                   size: ksTabletTextSizeExtraLarge - 2,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
@@ -56,8 +56,7 @@ class HomeBannerWidgetTablet extends StatelessWidget {
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.40,
                 child: const CustomText(
-                  text:
-                      'An all in one system that optimizes your products on your favourite selling platforms easily accessible, efficient and affordable.',
+                  text: homeSubtitle,
                   size: ksTabletTextSizeTiny + 2,
                   fontWeight: FontWeight.w300,
                   color: Colors.white,

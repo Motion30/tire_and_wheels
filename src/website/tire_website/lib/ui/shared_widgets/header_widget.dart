@@ -6,6 +6,7 @@ import 'package:tire_website/business_logic/auth/repo/authentication_repo.dart';
 import 'package:tire_website/business_logic/auth/repo/product_repo.dart';
 import 'package:tire_website/ui/shared_widgets/custom_dialog.dart';
 import 'package:tire_website/ui/shared_widgets/custom_text.dart';
+import 'package:tire_website/ui/shared_widgets/logo_widget.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class HeaderWidget extends StatelessWidget {
@@ -29,22 +30,7 @@ class HeaderWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Container(),
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                const SizedBox(
-                  height: 20,
-                  width: 20,
-                  child: Placeholder(color: Colors.white),
-                ),
-                const SizedBox(width: 20.0),
-                CustomText(
-                  text: 'Tyres and wheels',
-                  color: Colors.white,
-                  size: fontSize ?? 36.0,
-                ),
-              ],
-            ),
+            const LogoWidget(),
             if (showCart)
               StreamBuilder<DocumentSnapshot>(
                   stream: ProductRepo().cartStream(),

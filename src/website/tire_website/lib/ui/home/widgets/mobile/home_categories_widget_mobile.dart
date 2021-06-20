@@ -22,7 +22,8 @@ class HomeCategoriesWidgetMobile extends StatelessWidget {
             size: 22,
           ),
           const SizedBox(height: 50.0),
-          Column(
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
               categoriesItem(
                 context,
@@ -59,15 +60,15 @@ class HomeCategoriesWidgetMobile extends StatelessWidget {
       children: <Widget>[
         Container(
           height: 5.0,
-          width: MediaQuery.of(context).size.width * 0.80,
+          width: MediaQuery.of(context).size.width * 0.30,
           decoration: BoxDecoration(
             color: color ?? Colors.blue,
             border: Border.all(color: color ?? Colors.blue),
           ),
         ),
         Container(
-          height: 450.0,
-          width: MediaQuery.of(context).size.width * 0.80,
+          height: 220.0,
+          width: MediaQuery.of(context).size.width * 0.30,
           decoration: BoxDecoration(
             color: Colors.white,
             border: Border.all(color: color ?? Colors.blue),
@@ -86,8 +87,8 @@ class HomeCategoriesWidgetMobile extends StatelessWidget {
                 size: 20,
               ),
               SizedBox(
-                height: 240.0,
-                width: MediaQuery.of(context).size.width * 0.60,
+                height: 90.0,
+                width: MediaQuery.of(context).size.width * 0.25,
                 child: CustomImageWidget(
                   imageWidgetType: ImageWidgetType.asset,
                   imageUrl: imagePath,
@@ -95,7 +96,7 @@ class HomeCategoriesWidgetMobile extends StatelessWidget {
               ),
               SizedBox(
                 height: 40.0,
-                width: MediaQuery.of(context).size.width * 0.40,
+                width: MediaQuery.of(context).size.width * 0.20,
                 child: CustomButton(
                   onPress: () {
                     if (title.toLowerCase() == 'tubes') {
@@ -111,7 +112,7 @@ class HomeCategoriesWidgetMobile extends StatelessWidget {
                   },
                   title: 'Check Out',
                   fontSize: 12.0,
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.w400,
                 ),
               ),
             ],

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:tire_website/business_logic/auth/repo/authentication_repo.dart';
 
@@ -7,6 +8,8 @@ class OrderModel {
     @required this.address,
     @required this.products,
     @required this.status,
+    @required this.paymentType,
+    this.timestamp,
   });
 
   factory OrderModel.fromMap(Map<String, dynamic> map) {
@@ -15,6 +18,8 @@ class OrderModel {
       address: map['address'] as Map<String, dynamic>,
       products: map['products'] as List<Map<String, dynamic>>,
       status: map['status'] as String,
+      paymentType: map['payment_type'] as String,
+      timestamp: map['timestamp'] as Timestamp,
     );
   }
 
@@ -22,6 +27,8 @@ class OrderModel {
   final Map<String, dynamic> address;
   final List<Map<String, dynamic>> products;
   final String status;
+  final String paymentType;
+  final Timestamp timestamp;
 
   Map<String, dynamic> toMap() {
     final String userUid = AuthenticationRepo().getUserUid();
@@ -32,6 +39,8 @@ class OrderModel {
       'products': products,
       'status': status,
       'userId': userUid,
+      'payment_type': paymentType,
+      'timestamp': Timestamp.now(),
     };
   }
 }

@@ -15,3 +15,8 @@ enum NotificationType {
   likes,
   comment,
 }
+
+enum PaymentType {
+  bankTransfer,
+  cashOnDevivery,
+}

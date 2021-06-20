@@ -5,6 +5,7 @@ import 'package:tire_website/business_logic/auth/model/route.dart';
 import 'package:tire_website/ui/authentication/pages/wrapper.dart';
 import 'package:tire_website/ui/cart/cart_page.dart';
 import 'package:tire_website/ui/chat/chat_page.dart';
+import 'package:tire_website/ui/error.dart';
 import 'package:tire_website/ui/home/pages/home_page.dart';
 import 'package:tire_website/ui/order/orders_page.dart';
 import 'package:tire_website/ui/order_summary/order_sent_page.dart';
@@ -50,6 +51,8 @@ class _WebAppState extends State<WebApp> {
       ),
     ),
     routes: <String, Page<dynamic> Function(Uri, dynamic)>{
+      // RouteClass.home: (Uri uri, dynamic params) =>
+      // const MaterialPage<Widget>(child: ErrorPage()),
       RouteClass.home: (Uri uri, dynamic params) =>
           MaterialPage<Widget>(child: HomePage()),
       RouteClass.authPage: (Uri uri, dynamic params) =>

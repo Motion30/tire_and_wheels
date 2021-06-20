@@ -68,7 +68,7 @@ class CartPage extends StatelessWidget {
                 crossAxisCount: 2,
                 crossAxisSpacing: 10.0,
                 mainAxisSpacing: 10.0,
-                childAspectRatio: 1.1,
+                childAspectRatio: 0.95,
               ),
               emptyDisplay: const Center(
                 child: CustomText(
@@ -148,7 +148,7 @@ class CartPage extends StatelessWidget {
                 crossAxisCount: 2,
                 crossAxisSpacing: 10.0,
                 mainAxisSpacing: 10.0,
-                childAspectRatio: 0.8,
+                childAspectRatio: 0.65,
               ),
               emptyDisplay: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -210,6 +210,8 @@ class CartProductWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
+
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10.0),
       decoration: BoxDecoration(
@@ -220,31 +222,32 @@ class CartProductWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           SizedBox(
-            width: width ?? 220.0,
-            height: height ?? 180.0,
+            width: size.width * 0.22,
+            height: size.height * 0.30,
             child: CustomImageWidget(
               imageWidgetType: ImageWidgetType.network,
               imageUrl: cartItem.images.first,
             ),
           ),
+          const Spacer(),
           Column(
             children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  CustomText(
-                    text: 'Name',
-                    size: 15,
-                    color: Theme.of(context).accentColor,
-                  ),
-                  CustomText(
-                    text: cartItem.productName,
-                    size: 13,
-                    fontWeight: FontWeight.w300,
-                    color: Theme.of(context).accentColor,
-                  ),
-                ],
-              ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   children: <Widget>[
+              //     CustomText(
+              //       text: 'Name',
+              //       size: 15,
+              //       color: Theme.of(context).accentColor,
+              //     ),
+              //     CustomText(
+              //       text: cartItem.productName,
+              //       size: 13,
+              //       fontWeight: FontWeight.w300,
+              //       color: Theme.of(context).accentColor,
+              //     ),
+              //   ],
+              // ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
@@ -278,15 +281,15 @@ class CartProductWidget extends StatelessWidget {
                 ],
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   CustomText(
-                    text: 'Price',
+                    text: '\u20A6',
                     size: 15,
                     color: Theme.of(context).accentColor,
                   ),
                   CustomText(
-                    text: '#${cartItem.price}',
+                    text: '${cartItem.price}',
                     size: 13,
                     fontWeight: FontWeight.w300,
                     color: Theme.of(context).accentColor,
@@ -314,7 +317,7 @@ class CartProductWidget extends StatelessWidget {
                 fontSize: 11,
                 radius: 4.0,
                 height: 30.0,
-                buttonColor: Theme.of(context).primaryColor.withOpacity(0.7),
+                buttonColor: Theme.of(context).accentColor,
                 onPress: () {
                   BlocProvider.of<ProductBloc>(context)
                       .add(DeleteProductFromCartEvent(cartItem.id));
@@ -322,6 +325,7 @@ class CartProductWidget extends StatelessWidget {
               );
             },
           ),
+          const SizedBox(height: 10.0),
         ],
       ),
     );

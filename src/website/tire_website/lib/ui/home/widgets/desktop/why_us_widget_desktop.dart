@@ -3,6 +3,8 @@ import 'package:tire_website/ui/shared_widgets/custom_image_widget.dart';
 import 'package:tire_website/ui/shared_widgets/custom_text.dart';
 import 'package:tire_website/utils/eums.dart';
 
+import '../../contants.dart';
+
 class HomeWhyUsWidgetDesktop extends StatelessWidget {
   const HomeWhyUsWidgetDesktop();
 
@@ -23,19 +25,19 @@ class HomeWhyUsWidgetDesktop extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
               item(
-                'Order a product with ease',
-                'assets/images/corona.png',
-                'Get to products to more people and watch your products sell faster',
+                'CONVENIENCE',
+                'assets/images/con.png',
+                convenienceText,
               ),
               item(
-                'Get quality products at affordable prices',
+                'VAST SELECTION',
+                'assets/images/van.png',
+                vastText,
+              ),
+              item(
+                'EARN REWARDS!',
                 'assets/images/money_bag.png',
-                'Get to products to more people and watch your products sell faster',
-              ),
-              item(
-                'Dedicated Support',
-                'assets/images/chat.png',
-                'Get to products to more people and watch your products sell faster',
+                earnText,
               ),
             ],
           ),

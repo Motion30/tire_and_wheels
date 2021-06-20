@@ -23,7 +23,7 @@ class ProductWidgetDesktop extends StatelessWidget {
       height: MediaQuery.of(context).size.height,
       child: ListView(
         shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
+        // physics: const NeverScrollableScrollPhysics(),
         children: <Widget>[
           const HeaderWidget(),
           ProductPageBodyDesktop(type: type ?? 'tyres'),
@@ -58,7 +58,10 @@ class ProductWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
     return Container(
+      // width: 332,
+      // height: 533.56,
       padding: const EdgeInsets.symmetric(horizontal: 10.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(5.0),
@@ -68,84 +71,99 @@ class ProductWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           SizedBox(
-            width: 220.0,
-            height: 180.0,
+            width: size.width * 0.22,
+            height: size.height * 0.30,
             child: CustomImageWidget(
               imageWidgetType: ImageWidgetType.network,
               imageUrl: product.images.first,
             ),
           ),
-          Column(
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  CustomText(
-                    text: 'Product Name',
-                    size: 18,
-                    color: Theme.of(context).accentColor,
-                  ),
-                  CustomText(
-                    text: product.productName,
-                    size: 16,
-                    fontWeight: FontWeight.w300,
-                    color: Theme.of(context).accentColor,
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  CustomText(
-                    text: 'Product Brand',
-                    size: 18,
-                    color: Theme.of(context).accentColor,
-                  ),
-                  CustomText(
-                    text: product.productBrand,
-                    size: 16,
-                    fontWeight: FontWeight.w300,
-                    color: Theme.of(context).accentColor,
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  CustomText(
-                    text: 'Size',
-                    size: 18,
-                    color: Theme.of(context).accentColor,
-                  ),
-                  CustomText(
-                    text: '${product.size}r',
-                    size: 16,
-                    fontWeight: FontWeight.w300,
-                    color: Theme.of(context).accentColor,
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  CustomText(
-                    text: 'Price',
-                    size: 18,
-                    color: Theme.of(context).accentColor,
-                  ),
-                  CustomText(
-                    text: '#${product.price}',
-                    size: 16,
-                    fontWeight: FontWeight.w300,
-                    color: Theme.of(context).accentColor,
-                  ),
-                ],
-              ),
-            ],
+          const Spacer(),
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 10.0),
+            child: Column(
+              children: <Widget>[
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //   children: <Widget>[
+                //     CustomText(
+                //       text: 'Product Name',
+                //       size: 18,
+                //       color: Theme.of(context).accentColor,
+                //     ),
+                //     CustomText(
+                //       text: product.productName,
+                //       size: 16,
+                //       fontWeight: FontWeight.w300,
+                //       color: Theme.of(context).accentColor,
+                //     ),
+                //   ],
+                // ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    CustomText(
+                      text: 'Size',
+                      size: 18,
+                      color: Theme.of(context).accentColor,
+                    ),
+                    CustomText(
+                      text: '${product.size}r',
+                      size: 16,
+                      fontWeight: FontWeight.w300,
+                      color: Theme.of(context).accentColor,
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    CustomText(
+                      text: 'Brand',
+                      size: 18,
+                      color: Theme.of(context).accentColor,
+                    ),
+                    CustomText(
+                      text: product.productBrand,
+                      size: 16,
+                      fontWeight: FontWeight.w300,
+                      color: Theme.of(context).accentColor,
+                    ),
+                  ],
+                ),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    CustomText(
+                      text: '\u20A6',
+                      size: 18,
+                      color: Theme.of(context).accentColor,
+                    ),
+                    CustomText(
+                      text: '${product.price}',
+                      size: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).accentColor,
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
+              CustomButton(
+                title: 'Buy Now',
+                fontSize: 11,
+                radius: 4.0,
+                height: 30.0,
+                buttonColor: Theme.of(context).primaryColor,
+                onPress: () {
+                  //TODO: buy now function
+                },
+              ),
               BlocConsumer<ProductBloc, ProductState>(
                 listener: (BuildContext context, ProductState state) {
                   if (state is ErrorAddProductToCartState) {
@@ -165,8 +183,7 @@ class ProductWidget extends StatelessWidget {
                     fontSize: 11,
                     radius: 4.0,
                     height: 30.0,
-                    buttonColor:
-                        Theme.of(context).primaryColor.withOpacity(0.7),
+                    buttonColor: Theme.of(context).accentColor,
                     onPress: () {
                       BlocProvider.of<ProductBloc>(context)
                           .add(AddProductToCart(product));
@@ -174,18 +191,21 @@ class ProductWidget extends StatelessWidget {
                   );
                 },
               ),
-              CustomButton(
-                title: 'Buy Now',
-                fontSize: 11,
-                radius: 4.0,
-                height: 30.0,
-                buttonColor: Theme.of(context).primaryColor.withOpacity(0.7),
-                onPress: () {
-                  //TODO: buy now function
-                },
-              ),
             ],
           ),
+          const SizedBox(height: 10.0),
+          CustomButton(
+            title: 'Check Out',
+            fontSize: 11,
+            radius: 4.0,
+            height: 30.0,
+            width: 80.0,
+            buttonColor: Theme.of(context).primaryColor,
+            onPress: () {
+              //TODO: check out function
+            },
+          ),
+          const SizedBox(height: 10.0),
         ],
       ),
     );
@@ -232,6 +252,7 @@ class _BodyState extends State<Body> {
       width: MediaQuery.of(context).size.width * 0.75,
       height: MediaQuery.of(context).size.height,
       child: ListView(
+        padding: const EdgeInsets.only(top: 10.0),
         shrinkWrap: true,
         physics: const BouncingScrollPhysics(),
         children: <Widget>[
@@ -255,7 +276,7 @@ class _BodyState extends State<Body> {
                   crossAxisCount: 2,
                   crossAxisSpacing: 10.0,
                   mainAxisSpacing: 10.0,
-                  childAspectRatio: 1.1,
+                  childAspectRatio: 0.9,
                 ),
                 bottomLoader: const SizedBox(
                   height: 50,
